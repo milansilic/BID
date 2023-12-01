@@ -21,7 +21,7 @@ import { RedirectGuard } from 'src/authorization/services/guards/redirect.guard'
 
 const routes: Routes = [
   { path: '', redirectTo: 'layout/dashboard', pathMatch: 'full' },
-  { path: 'log-in', component: DashboardComponent },
+  { path: 'log-in', component: LogInComponent },
   { path: 'create-account', component: CreateAccountComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'reset-password/:reset-code', component: NewPasswordComponent },
