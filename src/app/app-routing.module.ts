@@ -20,7 +20,7 @@ import { AuthGuard } from 'src/authorization/services/guards/auth.guard';
 import { RedirectGuard } from 'src/authorization/services/guards/redirect.guard';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'log-in', pathMatch: 'full' },
+  { path: '', redirectTo: 'layout/dashboard', pathMatch: 'full' },
   { path: 'log-in', component: LogInComponent },
   { path: 'create-account', component: CreateAccountComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent },
