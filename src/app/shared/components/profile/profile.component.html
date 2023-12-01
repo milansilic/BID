@@ -1,0 +1,21 @@
+<form>
+    <input class="search" #phone type="search" id="gsearch" name="gsearch" [class.open-search]="openSearch">
+    <button class="search-btn" type="button" (click)="toggleSearch(phone.value)"></button>
+</form>
+
+<button class="notification-btn" type="button">
+    <span>{{ notificationNumber }}</span>
+</button>
+
+<picture>
+    <img src="../../../../assets/images/profileMockImg.jpg" alt="">
+</picture>
+
+<button class="profile-options" (click)="openProfileOptions()"></button>
+
+<nav>
+    <ul [class.opened]="profileOptions">
+        <li>my profile</li>
+        <li (click)="signOut()">sign out</li>
+    </ul>
+</nav>

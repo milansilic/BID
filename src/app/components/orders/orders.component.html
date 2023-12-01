@@ -1,0 +1,72 @@
+<!-- <app-my-dashboard *ngIf="!addOrder"></app-my-dashboard> -->
+
+<section class="material-grid shadow" *ngIf="!addOrder">
+   <header class="flex-space-between">
+      <h4>orders</h4>
+      <mat-form-field>
+         <mat-label>Filter</mat-label>
+         <input matInput (keyup)="applyFilter($event)" placeholder="" #input>
+      </mat-form-field>
+      <button type="button" (click)="createOrder()">add new order <span>+</span></button>
+   </header>
+   <div class="mat-elevation-z8">
+      <table mat-table matSort class="mat-elevation-z8" [dataSource]="dataSource">
+         <ng-container matColumnDef="orderNumber">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by orderNumber"> order
+               number
+            </th>
+            <td mat-cell *matCellDef="let order">{{order.orderNumber}}</td>
+         </ng-container>
+         <ng-container matColumnDef="client">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by client">
+               client
+            </th>
+            <td mat-cell *matCellDef="let order"> {{order.client}} </td>
+         </ng-container>
+         <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by status">
+               status
+            </th>
+            <td mat-cell *matCellDef="let order"> {{order.status}} </td>
+         </ng-container>
+         <ng-container matColumnDef="orderMaker">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by orderMaker">
+               order maker
+            </th>
+            <td mat-cell *matCellDef="let order"> {{order.orderMaker}} </td>
+         </ng-container>
+         <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef> actions </th>
+            <td mat-cell *matCellDef="let order" class="icon td-action">
+               <button (click)="openOrderDetails(order)"></button>
+               <button (click)="openDeleteModal(order)"></button>
+            </td>
+         </ng-container>
+         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+         <tr mat-row *matRowDef="let row; 
+            columns: displayedColumns;" (click)="getRecord(row)">
+         </tr>
+      </table>
+      <mat-paginator #paginator [pageSizeOptions]="[5, 15, 20]" showFirstLastButtons>
+      </mat-paginator>
+   </div>
+</section>
+
+<!-- DELETE -->
+<div class="delete-modal shadow" *ngIf="showDeleteOrderModal">
+   <header>
+      <h4>delete order</h4>
+   </header>
+   <p>Are you sure you want to delete order?
+      <!-- number of clicked order should be added here -->
+   </p>
+   <footer>
+      <app-button btnClass="confirm" btnText="yes" (click)="deleteOrder()"></app-button>
+      <app-button btnClass="cancel" btnText="no" (click)="closeModals()">
+      </app-button>
+   </footer>
+</div>
+
+<section class="mask" [class.delete-mask]="showDeleteOrderModal" (click)="closeModals()"></section>
+
+<progress-spinner *ngIf="spinner"></progress-spinner>

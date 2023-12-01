@@ -1,0 +1,52 @@
+<section class="auth-wrapper flex-space-between">
+   <div class="auth-form-wrapper">
+      <h1>Create an Account</h1>
+      <h4>Some subtitle text if it is needed</h4>
+      <form [formGroup]="createAccountForm" (ngSubmit)="submitCreateAccountForm()">
+         <fieldset class="create-account-form">
+            <mat-form-field>
+               <input matInput type="text" formControlName="firstName" [errorStateMatcher]="matcher"
+                  placeholder="ENTER FIRST NAME">
+               <mat-error *ngIf="f.firstName.errors?.required && f.firstName.touched "> First name is
+                  <strong>required</strong>
+               </mat-error>
+            </mat-form-field>
+            <mat-form-field>
+               <input matInput type="text" formControlName="lastName" [errorStateMatcher]="matcher"
+                  placeholder="ENTER LAST NAME">
+               <mat-error *ngIf="f.lastName.errors?.required && f.lastName.touched "> Last name is
+                  <strong>required</strong>
+               </mat-error>
+            </mat-form-field>
+            <mat-form-field>
+               <input matInput type="text" formControlName="email" [errorStateMatcher]="matcher"
+                  placeholder="ENTER EMAIL ADDRESS">
+               <mat-error *ngIf="f.email.hasError('email') && f.email.touched">Please enter a valid email address
+               </mat-error>
+               <mat-error *ngIf="f.email.errors?.required && f.email.touched "> Email is <strong>required</strong>
+               </mat-error>
+            </mat-form-field>
+            <mat-form-field>
+               <input matInput type="password" formControlName="password" [errorStateMatcher]="matcher"
+                  placeholder="ENTER  PASSWORD">
+               <mat-error *ngIf="f.email.errors?.required && f.email.touched "> Password is <strong>required</strong>
+               </mat-error>
+            </mat-form-field>
+            <mat-form-field>
+               <input matInput type="password" formControlName="confirmPassword" [errorStateMatcher]="matcher"
+                  placeholder="CONFIRM  PASSWORD">
+               <mat-error *ngIf="f.email.errors?.required && f.email.touched "> Confirm password is
+                  <strong>required</strong>
+               </mat-error>
+            </mat-form-field>
+         </fieldset>
+         <app-button btnClass="confirm" btnText="create account" type="submit"></app-button>
+      </form>
+   </div>
+   <div class="banner">
+      <app-button routerLink="/log-in" btnClass="banner-button" btnText="log in"></app-button>
+      <img class="background" src="../../../assets/images/banner.jpg" alt="banner">
+      <img class="logo" src="../../../assets/icons/logo-white.svg" alt="logo">
+   </div>
+</section>
+<progress-spinner *ngIf="spinner"></progress-spinner>

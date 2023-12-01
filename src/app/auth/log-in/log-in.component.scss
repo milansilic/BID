@@ -1,0 +1,24 @@
+@import '../../../styles/classes.scss';
+
+:host {
+   @extend .host-auth;
+}
+
+.auth-form-wrapper a {
+   display: inline-block;
+   color: var(--black);
+   font-size: 12px;
+   font-size: clamp(12px, 1vw, 14px);
+   text-transform: capitalize;
+   text-decoration: underline;
+   transition: color .12s;
+
+   &:hover {
+      color: rgba(#142230, .7);
+   }
+}
+
+.login-form {
+   display: flex;
+   flex-direction: column;
+}

@@ -1,0 +1,55 @@
+<!-- <app-my-dashboard *ngIf="!addOrder"></app-my-dashboard> -->
+
+<section class="material-grid shadow" *ngIf="!addTour">
+    <header class="flex-space-between">
+        <h4>tours</h4>
+        <mat-form-field>
+            <mat-label>Filter</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="" #input>
+        </mat-form-field>
+        <button type="button" (click)="createTour()">add new tour <span>+</span></button>
+    </header>
+    <div class="mat-elevation-z8">
+        <table mat-table matSort class="mat-elevation-z8" [dataSource]="dataSource">
+            <ng-container matColumnDef="number">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by orderNumber">tour
+                    number
+                </th>
+                <td mat-cell *matCellDef="let order">{{order.number}}</td>
+            </ng-container>
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef> actions </th>
+                <td mat-cell *matCellDef="let order" class="icon td-action">
+                    <button (click)="openTourDetails(order)"></button>
+                    <button (click)="openDeleteModal(order)"></button>
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; 
+              columns: displayedColumns;">
+            </tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[6, 12, 24]" showFirstLastButtons
+            aria-label="Select page of periodic elements">
+        </mat-paginator>
+    </div>
+</section>
+
+<!-- DELETE -->
+<!-- <div class="delete-modal shadow" *ngIf="deleteOrder">
+    <header>
+       <h4>delete order</h4>
+    </header>
+    <p>Are you sure you want to delete order?
+       
+    </p>
+    <footer>
+       <app-button btnClass="confirm" btnText="yes" type="submit"></app-button>
+       <app-button btnClass="cancel" btnText="no" type="submit" (click)="closeModals()">
+       </app-button>
+    </footer>
+ </div> -->
+
+<!-- <section class="mask" [class.delete-mask]="deleteOrder" (click)="closeModals()"></section> -->
+
+<progress-spinner *ngIf="spinner"></progress-spinner>

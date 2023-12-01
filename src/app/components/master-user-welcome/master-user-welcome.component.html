@@ -1,0 +1,65 @@
+<section class="wrapper">
+  <img src="../../../assets/icons/BIDpartners.svg" alt="BID partners">
+  <h2>Welcome! Now You Can Create Company</h2>
+  <h6>This is your first login, let's create a company</h6>
+  <form [formGroup]="createCompanyForm" (ngSubmit)="submitCompanyInfo()">
+    <fieldset class="general">
+      <h6>general</h6>
+      <app-input inputType="text" placeholderName="COMPANY NAME" marker="yes" type="required"
+        [formGroup]="createCompanyForm" [formControlName]="'name'"></app-input>
+      <app-select placeholderName="COUNTRY" marker="yes" type="required" [formGroup]="createCompanyForm"
+        [formControlName]="'country'"></app-select>
+      <app-input inputType="text" placeholderName="CITY" marker="yes" type="required" [formGroup]="createCompanyForm"
+        [formControlName]="'city'" capitalise></app-input>
+      <app-input inputType="text" placeholderName="POSTAL CODE" marker="yes" type="required"
+        [formGroup]="createCompanyForm" [formControlName]="'postalCode'" autocomplete="postal-code"></app-input>
+      <app-input class="wide" inputType="text" placeholderName="address" marker="yes" type="required"
+        [formGroup]="createCompanyForm" [formControlName]="'address'"></app-input>
+      <app-input inputType="text" placeholderName="BANK" marker="yes" type="required" [formGroup]="createCompanyForm"
+        [formControlName]="'bankName'"></app-input>
+      <app-input inputType="text" placeholderName="BANK ACCOUNT" marker="yes" type="required"
+        [formGroup]="createCompanyForm" [formControlName]="'bankAccount'"></app-input>
+      <app-input inputType="text" placeholderName="VAT" marker="yes" type="required" [formGroup]="createCompanyForm"
+        [formControlName]="'vat'"></app-input>
+      <app-input inputType="number" placeholderName="ID NUMBER" marker="yes" type="required"
+        [formGroup]="createCompanyForm" [formControlName]="'identificationNumber'"></app-input>
+      <app-input inputType="tel" placeholderName="PHONE" marker="yes" type="required" [formGroup]="createCompanyForm"
+        [formControlName]="'phone'" autocomplete="tel"></app-input>
+      <app-input inputType="tel" placeholderName="PHONE 2" [formGroup]="createCompanyForm" [formControlName]="'phone2'"
+        autocomplete="tel"></app-input>
+      <app-input inputType="email" placeholderName="EMAIL" type="required" [formGroup]="createCompanyForm"
+        [formControlName]="'email'" marker="yes"></app-input>
+      <app-input inputType="url" placeholderName="WEBSITE" [formGroup]="createCompanyForm"
+        [formControlName]="'webSiteUrl'"></app-input>
+    </fieldset>
+
+    <fieldset class="ceo-info">
+      <h6>ceo info</h6>
+      <app-input inputType="number" placeholderName="PHONE" marker="yes" type="required" [formGroup]="createCompanyForm"
+        [formControlName]="'ceoInfoPhone'"></app-input>
+      <app-input inputType="number" placeholderName="CELL PHONE" marker="yes" type="required"
+        [formGroup]="createCompanyForm" [formControlName]="'cellPhone'"></app-input>
+      <app-input inputType="email" placeholderName="EMAIL" marker="yes" type="required" [formGroup]="createCompanyForm"
+        [formControlName]="'ceoInfoEmail'"></app-input>
+    </fieldset>
+
+    <fieldset class="profile-photo">
+      <h6>profil photo</h6>
+      <image-loader (uploadedFile)="uploadProfilePhoto($event)"></image-loader>
+    </fieldset>
+
+    <!-- <fieldset class="additional-info">
+      <h6>additional info</h6>
+      <app-input inputType="number" placeholderName="PAK number"></app-input>
+      <app-select class="narrower" placeholderName="CURRENCIES" marker="yes"></app-select>
+      <app-select class="narrow" placeholderName="COURSE TYPE"></app-select>
+      <app-input inputType="text" placeholderName="GPS COORDINATES"></app-input>
+      <app-select placeholderName="COMPANY TYPE" marker="yes"></app-select>
+      <app-input class="wide" inputType="text" placeholderName="MAILING ADDRESS" marker="yes"></app-input>
+      <app-textarea placeholderName="notes" placeholder="Describe yourself here..."></app-textarea>
+    </fieldset> -->
+    <app-button btnClass="confirm" btnText="save" type="submit"></app-button>
+  </form>
+</section>
+
+<progress-spinner *ngIf="spinner"></progress-spinner>

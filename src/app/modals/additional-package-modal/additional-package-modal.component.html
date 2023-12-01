@@ -1,0 +1,45 @@
+<form class="additional-package-modal" [formGroup]="additionalPackageForm" (ngSubmit)="submitAdditionalPackage()">
+    <header class="flex-space-between">
+        <h4>Add Type of Packaging</h4>
+        <img class="pointer" (click)="closeModal(false)" src="../../../assets/icons/x.svg" alt="close modal">
+    </header>
+    <main class="form-core flex-space-between">
+        <app-select placeholderName="type" marker="yes" type="required" [formGroup]="additionalPackageForm"
+            [formControlName]="'type'" [dropdownValues]="typesOfPackaging">
+        </app-select>
+        <div class="double-input-field flex-space-between">
+            <div class="check">
+                <input class="cent-fl" type="checkbox" id="adr" name="adr" value="" [formGroup]="additionalPackageForm"
+                    formControlName="isStackable">
+                <label class="pointer">is stackable</label><br>
+            </div>
+            <app-input inputType="number" placeholderName="rows" marker="yes" type="required"
+                [formGroup]="additionalPackageForm" [formControlName]="'rows'">
+            </app-input>
+        </div>
+        <div class="multi-inputs-field flex-space-between">
+            <app-input class="input-small" inputType="number" placeholderName="number" marker="yes" type="required"
+                [formGroup]="additionalPackageForm" [formControlName]="'number'">
+            </app-input>
+            <app-input class="input-small" inputType="number" placeholderName="length" marker="yes" type="required"
+                [formGroup]="additionalPackageForm" [formControlName]="'length'">
+            </app-input>
+            <app-input class="input-small" inputType="number" placeholderName="width" marker="yes" type="required"
+                [formGroup]="additionalPackageForm" [formControlName]="'width'">
+            </app-input>
+            <app-input class="input-small" inputType="number" placeholderName="height" marker="yes" type="required"
+                [formGroup]="additionalPackageForm" [formControlName]="'height'">
+            </app-input>
+            <app-input class="input-small" inputType="number" placeholderName="weight" marker="yes" type="required"
+                [formGroup]="additionalPackageForm" [formControlName]="'weight'">
+            </app-input>
+            <app-input class="input-medium" inputType="number" placeholderName="loading meters" marker="yes"
+                type="required" [formGroup]="additionalPackageForm" [formControlName]="'loadingMeters'">
+            </app-input>
+        </div>
+        <footer>
+            <app-button btnClass="confirm" btnText="save&close" type="submit"></app-button>
+            <app-button btnClass="cancel" btnText="cancel" btnType="button" (click)="closeModal(false)"></app-button>
+        </footer>
+    </main>
+</form>

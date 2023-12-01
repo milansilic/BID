@@ -1,0 +1,73 @@
+<!-- <app-my-dashboard></app-my-dashboard> -->
+
+<section class="material-grid shadow">
+   <header class="flex-space-between">
+      <h4>vehicles</h4>
+      <mat-form-field>
+         <mat-label>Filter</mat-label>
+         <input matInput (keyup)="applyFilter($event)" placeholder="" #input>
+      </mat-form-field>
+      <button type="button" (click)="openAddVehicle()">add new vehicle <span>+</span></button>
+   </header>
+   <div class="mat-elevation-z8">
+      <table mat-table matSort class="mat-elevation-z8" [dataSource]="dataSource">
+         <ng-container matColumnDef="plateNumber">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by plateNumber">
+               plate number
+            </th>
+            <td mat-cell *matCellDef="let vehicles"> {{vehicles.plateNumber}} </td>
+         </ng-container>
+         <ng-container matColumnDef="type">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by type">
+               type
+            </th>
+            <td class="type" mat-cell *matCellDef="let vehicles"> {{vehicles.vehicleType}} </td>
+         </ng-container>
+         <ng-container matColumnDef="reg">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by reg">
+               reg
+            </th>
+            <td mat-cell *matCellDef="let vehicles"> {{vehicles.regDate | date}} </td>
+         </ng-container>
+         <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef> actions </th>
+            <td mat-cell *matCellDef="let element" class="icon">
+               <button (click)="openEditModal(element)"></button>
+               <button (click)="openDeleteModal(element)"></button>
+            </td>
+         </ng-container>
+         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+         <tr mat-row *matRowDef="let row; columns: displayedColumns;" [class.active]="clickedRow === row"
+            (click)="getRecord(row)">
+         </tr>
+      </table>
+      <mat-paginator 
+         [pageSizeOptions]="[5, 15, 20]" 
+         showFirstLastButtons 
+         #paginator>
+      </mat-paginator>
+      <!-- <ul id="pages-wrapper"></ul> -->
+   </div>
+</section>
+
+<!-- ADD / EDIT -->
+<vehicle-modal *ngIf="openVehicleModal" [vehicleId]="selectedVehicleId" [modalType]="modalType"
+   (closeEvent)="closeAddVehicle($event)">
+</vehicle-modal>
+
+<!-- DELETE -->
+<div class="delete-modal shadow" *ngIf="showDeleteModal">
+   <header>
+      <h4>delete vehicle</h4>
+   </header>
+   <p>Are you sure you want to delete this vehicle?</p>
+   <footer>
+      <app-button btnClassName="confirm" btnText="yes" (click)="deleteVehicle()"></app-button>
+      <app-button btnClassName="cancel" btnText="no" type="submit" (click)="closeModals()">
+      </app-button>
+   </footer>
+</div>
+
+<mask *ngIf="openVehicleModal"></mask>
+
+<progress-spinner *ngIf="spinner"></progress-spinner>

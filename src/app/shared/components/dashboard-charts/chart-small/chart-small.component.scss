@@ -1,0 +1,22 @@
+@import '../../../../../styles/classes.scss';
+
+:host {
+    padding: 1.667vw 1.979vw;
+}
+
+img.veh {
+    display: block;
+    width: 30%;
+    height: auto;
+    margin-bottom: 13%;
+}
+
+output {
+    margin-bottom: 4.6%;
+}
+
+h6 {
+    display: block;
+    width: 12ch;
+    font-weight: 300;
+}

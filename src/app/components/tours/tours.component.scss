@@ -1,0 +1,14 @@
+@import '../../../styles/classes.scss';
+
+:host {
+    display: block;
+    padding-right: 150px;
+}
+
+.mask {
+    display: none;
+
+    &.delete-mask {
+        display: block;
+    }
+}

@@ -1,0 +1,14 @@
+@import '../../../styles/classes.scss';
+
+form {
+  width: 100%;
+}
+
+.card-container > span {
+  align-items: center;
+  width: 47.5%;
+}
+
+.card-container > span > * {
+  width: 48%;
+}

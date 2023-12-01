@@ -1,0 +1,72 @@
+<div class="connect-tour-modal" *ngIf="showForm">
+  <header class="flex-space-between">
+    <h4>Add Driver</h4>
+    <img class="pointer" (click)="closeModal()" src="../../../assets/icons/x.svg" alt="close modal">
+  </header>
+
+  <div class="form-core flex-space-between">
+    <form [formGroup]="driverForm">
+      <div class="card-container flex-space-between">
+        <app-select
+          placeholderName="driver"
+          marker="yes"
+          type="required"
+          [formGroup]="driverForm"
+          [formControlName]="'driver'">
+        </app-select>
+      </div>
+
+      <app-input
+        placeholderName="full name"
+        marker="yes"
+        type="required"
+        inputType="text"
+        [formGroup]="driverForm"
+        [formControlName]="'fullName'">
+      </app-input>
+
+      <span class="flex-space-between">
+        <app-input
+          placeholderName="start km"
+          marker="yes"
+          type="required"
+          inputType="text"
+          [formGroup]="driverForm"
+          [formControlName]="'startKm'">
+        </app-input>
+
+        <app-input
+          placeholderName="end km"
+          marker="yes"
+          type="required"
+          inputType="text"
+          [formGroup]="driverForm"
+          [formControlName]="'endKm'">
+        </app-input>
+      </span>
+
+      <span class="flex-space-between">
+        <app-datepicker
+          labelText="start date"
+          type="required"
+          marker="yes"
+          [formGroup]="driverForm"
+          [formControlName]="'startDate'">
+        </app-datepicker>
+
+        <app-datepicker
+          labelText="end date"
+          type="required"
+          marker="yes"
+          [formGroup]="driverForm"
+          [formControlName]="'endDate'">
+        </app-datepicker>
+      </span>
+    </form>
+  </div>
+
+  <footer>
+    <app-button btnClass="confirm" btnText="save&close" type="submit"></app-button>
+    <app-button btnClass="cancel" btnText="cancel" type="submit" (click)="closeModal()"></app-button>
+  </footer>
+</div>

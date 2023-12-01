@@ -1,0 +1,268 @@
+<section class="create-tour" *ngIf="showForm">
+  <h2>create tour</h2>
+
+  <form class="col-one" [formGroup]="createTourForm">
+    <header class="flex-space-between">
+      <h4>base info - principal</h4>
+    </header>
+
+    <fieldset class="flex-space-between">
+      <app-select placeholderName="carrier" [dropdownValues]="carriers" marker="yes" type="required"
+        [formGroup]="createTourForm" [formControlName]="'carrierId'">
+      </app-select>
+
+      <div class="double-input-field flex-space-between">
+        <div class="check">
+          <input class="cent-fl" type="checkbox" id="adr" name="adr" value="" [formGroup]="createTourForm"
+            [formControlName]="'hasTrailer'">
+          <label for="adr">has trailer</label>
+        </div>
+
+        <app-input placeholderName="number" marker="yes" type="required" [formGroup]="createTourForm"
+          [formControlName]="'number'">
+        </app-input>
+      </div>
+
+      <app-datepicker labelText="start date" type="required" marker="yes" [formGroup]="createTourForm"
+        [formControlName]="'startDate'">
+      </app-datepicker>
+
+      <app-select placeholderName="status" marker="yes" type="required" [formGroup]="createTourForm"
+        [formControlName]="'status'" [dropdownValues]="statuses">
+      </app-select>
+
+      <app-select placeholderName="plate num" marker="yes" type="required" [formGroup]="createTourForm"
+        [formControlName]="'vehicleId'" [dropdownValues]="vehicles">
+      </app-select>
+
+      <div class="double-input-field flex-space-between">
+        <app-input inputType="text" placeholderName="PRICE" marker="yes" type="required" [formGroup]="createTourForm"
+          [formControlName]="'price'">
+        </app-input>
+
+        <app-select inputType="text" placeholderName="CURRENCY" marker="yes" type="required"
+          [formGroup]="createTourForm" [formControlName]="'currency'" [dropdownValues]="currencies">
+        </app-select>
+      </div>
+
+      <app-datepicker labelText="end date" type="required" marker="yes" [formGroup]="createTourForm"
+        [formControlName]="'endDate'">
+      </app-datepicker>
+
+      <app-select placeholderName="tour maker" marker="yes" type="required" [formGroup]="createTourForm"
+        [formControlName]="'tourMakerId'" [dropdownValues]="tourMakers">
+      </app-select>
+
+      <div class="separator"></div>
+
+      <div class="km-wrapper">
+        <app-input inputType="number" placeholderName="START KM" marker="yes" type="required"
+          [formGroup]="createTourForm" [formControlName]="'startKm'" (change)="getTourDifferenceInKm()">
+        </app-input>
+
+        <app-input inputType="number" placeholderName="END KM" marker="yes" type="required" [formGroup]="createTourForm"
+          [formControlName]="'endKm'" (change)="getTourDifferenceInKm()">
+        </app-input>
+      </div>
+
+      <div class="distance">
+        <div class="label">Distance</div>
+        <div class="value">{{tourDifferenceInKm}} km</div>
+      </div>
+
+      <app-textarea inputType="text" placeholderName="notes" placeholderText="Enter the text here..." type="required"
+        [formGroup]="createTourForm" name="notes" [formControlName]="'notes'">
+      </app-textarea>
+
+      <div class="separator"></div>
+
+      <div class="check">
+        <input class="cent-fl" type="checkbox" id="subcontractor" name="subcontractor" value=""
+          [formGroup]="createTourForm" [formControlName]="'isSubcontractor'">
+        <label for="subcontractor">is Subcontractor</label>
+      </div>
+    </fieldset>
+  </form>
+
+  <section class="material-grid">
+    <header class="flex-space-between">
+      <h4>drivers</h4>
+      <button type="button" (click)="openAddDriver()">add new driver <span>+</span></button>
+    </header>
+
+    <div class="mat-elevation-z8">
+      <table
+        mat-table
+        matSort
+        class="mat-elevation-z8"
+        [dataSource]="dataSource">
+
+        <ng-container matColumnDef="fullName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by fullName">Full name</th>
+          <td mat-cell *matCellDef="let order">Goran Silic</td>
+        </ng-container>
+
+        <ng-container matColumnDef="startKm">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by startKm">Start km</th>
+          <td mat-cell *matCellDef="let order">10 km</td>
+        </ng-container>
+
+        <ng-container matColumnDef="endKm">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by endKm">End km</th>
+          <td mat-cell *matCellDef="let order">20 km</td>
+        </ng-container>
+
+        <ng-container matColumnDef="startDate">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by startDate">Start date</th>
+          <td mat-cell *matCellDef="let order">13/10/2023</td>
+        </ng-container>
+
+        <ng-container matColumnDef="endDate">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by endDate">End date</th>
+          <td mat-cell *matCellDef="let order">23/10/2023</td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef> actions </th>
+          <td mat-cell *matCellDef="let order" class="icon td-action">
+            <button (click)="openEditOrderModal()"></button>
+            <button (click)="openDeleteOrderModal()"></button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="driversColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: driversColumns;"></tr>
+      </table>
+
+      <mat-paginator [pageSizeOptions]="[6, 12, 24]" showFirstLastButtons aria-label="Select page of periodic elements">
+      </mat-paginator>
+    </div>
+  </section>
+
+  <section class="material-grid">
+    <header class="flex-space-between">
+      <h4>orders</h4>
+      <button type="button">print annoucement for border<span><img src="../../../assets/icons/print.svg"
+            alt=""></span></button>
+      <button type="button">print order<span><img src="../../../assets/icons/print.svg" alt=""></span></button>
+    </header>
+
+    <div class="mat-elevation-z8">
+      <table mat-table matSort class="mat-elevation-z8" [dataSource]="dataSource">
+
+        <ng-container matColumnDef="orderNumber">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by orderNumber">
+            order
+            number
+          </th>
+          <td mat-cell *matCellDef="let order">{{order.baseInfo.number}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="client">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by client">
+            client
+          </th>
+          <td mat-cell *matCellDef="let order"> {{order.baseInfo.clientId}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by status">
+            status
+          </th>
+          <td mat-cell *matCellDef="let order"> {{order.baseInfo.status}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="orderMaker">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by orderMaker">
+            order maker
+          </th>
+          <td mat-cell *matCellDef="let order"> {{order.orderMaker}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef> actions </th>
+          <td mat-cell *matCellDef="let order" class="icon td-action">
+            <button (click)="openEditOrderModal()"></button>
+            <button (click)="openDeleteOrderModal()"></button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row;
+                 columns: displayedColumns;">
+        </tr>
+      </table>
+
+      <mat-paginator [pageSizeOptions]="[6, 12, 24]" showFirstLastButtons aria-label="Select page of periodic elements">
+      </mat-paginator>
+    </div>
+  </section>
+
+  <section class="material-grid">
+    <header class="flex-space-between">
+      <h4>Expenses</h4>
+      <button type="button">print expenses<span><img src="../../../assets/icons/print.svg" alt=""></span></button>
+    </header>
+
+    <div class="mat-elevation-z8">
+      <table mat-table matSort class="mat-elevation-z8" [dataSource]="expenses">
+
+        <ng-container matColumnDef="type">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by type">
+            type
+          </th>
+          <td mat-cell *matCellDef="let expense">{{expense.type}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="price">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by price">
+            price
+          </th>
+          <td mat-cell *matCellDef="let expense"> {{expense.price}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="quantity">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by quantity">
+            quantity
+          </th>
+          <td mat-cell *matCellDef="let expense"> {{expense.quantity}} </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef> actions </th>
+          <td mat-cell *matCellDef="let order" class="icon td-action">
+            <button (click)="openEditExpenseModal()"></button>
+            <button (click)="openDeleteExpenseModal()"></button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="expensesColumns"></tr>
+        <tr mat-row *matRowDef="let row;
+                 columns: expensesColumns;">
+        </tr>
+      </table>
+
+      <mat-paginator [pageSizeOptions]="[6, 12, 24]" showFirstLastButtons aria-label="Select page of periodic elements">
+      </mat-paginator>
+    </div>
+  </section>
+
+  <footer>
+    <app-button btnClass="next" btnText="save" type="submit"></app-button>
+    <app-button btnClass="confirm" btnText="print travel order" type="submit"></app-button>
+    <app-button routerLink="../tours" btnClass="cancel" btnText="cancel" type="submit"></app-button>
+  </footer>
+</section>
+
+<add-expense-modal *ngIf="addExpenseModal" (closeModalEvnt)="closeAddExpense()"></add-expense-modal>
+
+<add-driver-modal *ngIf="addDriverModal" (closeModalEvnt)="closeAddDriver()"></add-driver-modal>
+
+<progress-spinner *ngIf="spinner"></progress-spinner>
+
+<!-- MOCK BUTTON -->
+<!-- delete this when set openAddExpense() in propper place  -->
+<button (click)="openAddExpense()" style="padding: 1vw; outline: 4px dashed teal; cursor:pointer;">
+  Add-expense-modal - MOCK btn
+</button>

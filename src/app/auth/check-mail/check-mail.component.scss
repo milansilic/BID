@@ -1,0 +1,47 @@
+@import '../../../styles/classes';
+
+:host {
+   @extend .host-auth;
+}
+
+.auth-form-wrapper {
+
+   img {
+      display: block;
+      width: 68%;
+      height: auto;
+      margin: 2vh auto 4vh;
+
+      @media (min-width: 768px) {
+         width: 78%;
+         margin: 1vh auto 2vh;
+      }
+
+      @media (orientation: landscape) {
+         max-width: 336px;
+         margin: 0 0 3vh;
+      }
+   }
+
+   p {
+      width: 30vh;
+      margin: 0 auto;
+      font-size: 14px;
+      line-height: 1.42;
+
+      @media (min-width: 768px) {
+         width: 100%;
+      }
+
+      @media (orientation: landscape) {
+         max-width: 312px;
+         margin: 0;
+      }
+   }
+
+   p a {
+      color: var(--green);
+      font-weight: 600;
+      text-decoration: none;
+   }
+}

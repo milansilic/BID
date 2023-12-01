@@ -1,0 +1,187 @@
+<div [formGroup]="formGroup">
+
+  <mat-form-field class="app-select">
+    <mat-label>
+      {{ placeholderName }}
+      <span aria-hidden="true"
+        class="mat-placeholder-required mat-form-field-required-marker ng-tns-c67-0 ng-star-inserted"></span>
+    </mat-label>
+
+    <mat-select [formControlName]="formControlName" (selectionChange)="onSelectionChanged($event)">
+      <mat-option *ngFor="let ddv of dropdownValues" [value]="ddv.key">
+        {{ddv.value}}
+      </mat-option>
+    </mat-select>
+
+    <mat-select *ngIf="placeholderName==='COUNTRY'" [formControlName]="formControlName">
+      <mat-option *ngFor="let co of keys(countries)" [value]="co">
+        {{countries[co]}}
+      </mat-option>
+    </mat-select>
+
+    <!-- <mat-select *ngIf="placeholderName==='CURRENCIES' || placeholderName==='currency'"
+      [formControlName]="formControlName">
+      <mat-option *ngFor="let currency of keys(currencies)" [value]="currency">
+        {{currencies[currency]}}
+      </mat-option>
+    </mat-select>
+
+    <mat-select *ngIf="placeholderName==='COURSE TYPE'" [formControlName]="formControlName">
+      <mat-option *ngFor="let course of keys(courses)" [value]="course">
+        {{courses[course]}}
+      </mat-option>
+    </mat-select>
+
+    <mat-select *ngIf="placeholderName==='COMPANY TYPE'" [formControlName]="formControlName">
+      <mat-option *ngFor="let type of keys(types)" [value]="type">
+        {{types[type]}}
+      </mat-option>
+    </mat-select>  
+
+    <mat-select *ngIf="placeholderName==='category'" [formControlName]="formControlName">
+      <mat-option *ngFor="let cat of keys(category)" [value]="cat">
+        {{category[cat]}}
+      </mat-option>
+    </mat-select>
+
+    <mat-select *ngIf="placeholderName==='type'" [formControlName]="formControlName">
+      <mat-option *ngFor="let vt of keys(vehicleTypes)" [value]="vt">
+        {{vehicleTypes[vt]}}
+      </mat-option>
+    </mat-select>
+
+    <mat-select *ngIf="placeholderName==='reg. place'" [formControlName]="formControlName">
+      <mat-option *ngFor="let rp of keys(regPlace)" [value]="rp">
+        {{regPlace[rp]}}
+      </mat-option>
+    </mat-select>
+
+    <mat-select *ngIf="placeholderName==='year of production'" [formControlName]="formControlName">
+      <mat-option *ngFor="let yop of keys(yearOfProduction)" [value]="yop">
+        {{yearOfProduction[yop]}}
+      </mat-option>
+    </mat-select>
+
+    <mat-select *ngIf="placeholderName==='adr class'" [formControlName]="formControlName">
+      <mat-option *ngFor="let adrc of keys(adrClass)" [value]="adrc">
+        {{adrClass[adrc]}}
+      </mat-option>
+    </mat-select>
+
+    <mat-select *ngIf="placeholderName==='insurance type'" [formControlName]="formControlName">
+      <mat-option *ngFor="let it of keys(insuranceType)" [value]="it">
+        {{insuranceType[it]}}
+      </mat-option>
+    </mat-select>
+
+    <mat-select *ngIf="placeholderName==='property type'" [formControlName]="formControlName">
+      <mat-option *ngFor="let pt of keys(propertyType)" [value]="pt">
+        {{propertyType[pt]}}
+      </mat-option>
+    </mat-select>
+
+    <mat-select *ngIf="placeholderName==='client'" [formControlName]="formControlName">
+      <mat-option *ngFor="let cl of keys(client)" [value]="cl">
+        {{client[cl]}}
+      </mat-option>
+    </mat-select>
+
+    <mat-select *ngIf="placeholderName==='status'" [formControlName]="formControlName">
+      <mat-option *ngFor="let st of keys(status)" [value]="st">
+        {{status[st]}}
+      </mat-option>
+    </mat-select>
+
+    <mat-select *ngIf="placeholderName==='transport type'" [formControlName]="formControlName">
+      <mat-option *ngFor="let tt of keys(transportType)" [value]="tt">
+        {{transportType[tt]}}
+      </mat-option>
+    </mat-select>
+
+    <mat-select *ngIf="placeholderName==='order maker'" [formControlName]="formControlName">
+      <mat-option *ngFor="let om of keys(orderMaker)" [value]="om">
+        {{orderMaker[om]}}
+      </mat-option>
+    </mat-select>
+
+    <mat-select *ngIf="placeholderName==='supplier'" [formControlName]="formControlName">
+      <mat-option *ngFor="let sp of keys(suplier)" [value]="sp">
+        {{suplier[sp]}}
+      </mat-option>
+    </mat-select>
+
+    <mat-select
+      *ngIf="placeholderName==='loading company' || placeholderName==='reloading company' || placeholderName==='unloading company' || placeholderName==='importer'"
+      [formControlName]="formControlName">
+      <mat-option *ngFor="let lc of keys(loadingCompany)" [value]="lc">
+        {{loadingCompany[lc]}}
+      </mat-option>
+    </mat-select>
+
+    <mat-select *ngIf="placeholderName==='customs agent'" [formControlName]="formControlName">
+      <mat-option *ngFor="let ca of keys(customsAgent)" [value]="ca">
+        {{customsAgent[ca]}}
+      </mat-option>
+    </mat-select>
+
+    <mat-select *ngIf="placeholderName==='customs place'" [formControlName]="formControlName">
+      <mat-option *ngFor="let cp of keys(customsPlace)" [value]="cp">
+        {{customsPlace[cp]}}
+      </mat-option>
+    </mat-select>
+
+    <mat-select *ngIf="placeholderName==='type of customs procedure'" [formControlName]="formControlName">
+      <mat-option *ngFor="let tocp of keys(typeOfCustomsProcedure)" [value]="tocp">
+        {{typeOfCustomsProcedure[tocp]}}
+      </mat-option>
+    </mat-select> -->
+
+    <!-- <mat-select *ngIf="placeholderName==='financial impact'" [formControlName]="formControlName">
+      <mat-option *ngFor="let fi of keys(financialImpact)" [value]="fi">
+        {{financialImpact[fi]}}
+      </mat-option>
+    </mat-select>
+
+    <mat-select *ngIf="placeholderName==='type of cost'" [formControlName]="formControlName">
+      <mat-option *ngFor="let toc of keys(typeOfCost)" [value]="toc">
+        {{typeOfCost[toc]}}
+      </mat-option>
+    </mat-select>
+
+    <mat-select *ngIf="placeholderName==='document type'" [formControlName]="formControlName">
+      <mat-option *ngFor="let dc of keys(documentType)" [value]="dc">
+        {{documentType[dc]}}
+      </mat-option>
+    </mat-select>
+
+    <mat-select *ngIf="placeholderName==='carrier'" [formControlName]="formControlName">
+      <mat-option *ngFor="let car of keys(carrier)" [value]="car">
+        {{carrier[car]}}
+      </mat-option>
+    </mat-select>
+
+    <mat-select *ngIf="placeholderName==='status'" [formControlName]="formControlName">
+      <mat-option *ngFor="let st of keys(status)" [value]="st">
+        {{status[st]}}
+      </mat-option>
+    </mat-select>
+
+
+    <mat-select *ngIf="placeholderName==='plate num'" [formControlName]="formControlName">
+      <mat-option *ngFor="let pn of keys(plateNumber)" [value]="pn">
+        {{plateNumber[pn]}}
+      </mat-option>
+    </mat-select>
+
+    <mat-select *ngIf="placeholderName==='driver'" [formControlName]="formControlName">
+      <mat-option *ngFor="let dr of keys(driver)" [value]="dr">
+        {{driver[dr]}}
+      </mat-option>
+    </mat-select>
+
+    <mat-select *ngIf="placeholderName==='tour maker'" [formControlName]="formControlName">
+      <mat-option *ngFor="let tm of keys(tourMaker)" [value]="tm">
+        {{tourMaker[tm]}}
+      </mat-option>
+    </mat-select> -->
+  </mat-form-field>

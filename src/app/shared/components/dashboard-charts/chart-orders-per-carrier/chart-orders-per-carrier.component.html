@@ -1,0 +1,27 @@
+<h4>Orders per carrier</h4>
+
+<app-select placeholderName="client" marker="yes" type="required"></app-select>
+
+<img class="filter pointer" src="../../../assets/icons/filter.svg" alt="filter">
+
+<div class="chart-container">
+    <canvas id="chart-orders-per-carrier"></canvas>
+    <div class="cent-abs">
+        <span class="cent-abs cent-fl"
+            *ngFor="let vp of valuePercs; let i = index" 
+            [style.--distance1]="i * (360 / noOfVals) + (180 / noOfVals) + 'deg'"
+            [style.--distance2]="(-vp/38) - 3 + 'vw'"
+            [style.--distance3]="(-vp/40) - 2.15 + 'vw'">
+                <p [style.--ratationReset]="-i * (360 / noOfVals) + (noOfVals * 7.5) + 'deg'">{{ vp }}%</p>
+        </span>
+    </div>
+    <p class="centralValue cent-abs cent-fl"> {{ centralValue }}</p>
+</div>
+
+<ul [style.--noOfRows]="noOfRows">
+    <li class="pointer" *ngFor="let cl of clients; let i = index" (click)="nekaFunkcija(i)"> 
+        <span [style.--dotCol]="lineColors[i]"></span>
+        {{ cl }} 
+        <b>{{ dataValuesFormated[i] }}</b>
+    </li>
+</ul>

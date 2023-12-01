@@ -1,0 +1,120 @@
+:host {
+   display: block;
+   position: relative;
+   min-height: 100%;
+}
+
+// .welcome-wrapper,
+.wrapper {
+   padding-top: 6vh;
+   padding-bottom: 12vh;
+   background: var(--background) url("../../../assets/images/background.jpg") center bottom no-repeat;
+   background-size: contain;
+   @media (orientation: landscape) {
+      background-size: cover;
+   }
+
+   &>form {
+      padding-right: 150px;
+   }
+
+   h2, h6 {
+      width: 100%;
+   }
+   
+   img {
+      margin-bottom: 6vh;
+   }
+
+   h2 {
+      margin-bottom: .4vw;
+   }
+   
+   & > h6 {
+      margin-bottom: 2.8vw;
+   }
+
+   fieldset h6 {
+      margin-bottom: 1.6vw;
+      font-weight: 600;
+      letter-spacing: .3em;
+   }   
+}
+
+form,
+fieldset {
+   display: flex;
+   flex-wrap: wrap;
+   align-items: flex-start;
+}
+
+fieldset {
+   margin-bottom: 1.8vw;
+
+   &.general,
+   &.additional-info {
+      flex-basis: 100%;
+   }
+
+   &.ceo-info {
+      flex-basis: 50%;
+   }
+
+   &.profile-photo {
+      flex-basis: 50%;
+   }
+
+   app-input,
+   app-select,
+   app-textarea,
+   app-datepicker {
+      display: block;
+   }
+
+   @media (min-width: 1280px) {
+
+      &.general,
+      &.additional-info {
+         flex-basis: 52.8%;
+
+         app-input,
+         app-select,
+         app-datepicker {
+            width: 44.6969%;
+            margin-right: 3.7878%;
+         }
+
+         app-textarea,
+         app-input.wide {
+            width: 93.1816%;
+         }
+
+         app-select.narrower {
+            width: 21.7%;
+            margin-right: 1.6969%;
+         }
+
+         app-select.narrow {
+            width: 21.3%;
+         }
+      }
+
+      &.ceo-info {
+         flex-basis: 27.2%;
+
+         app-input,
+         app-select {
+            width: 86.7647%;
+         }
+      }
+
+      &.profile-photo {
+         flex-basis: 20%;
+      }
+   }
+}
+
+app-button {
+   align-self: flex-end;
+   margin-left: auto;
+}

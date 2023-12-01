@@ -1,0 +1,14 @@
+@import '../../../styles/classes.scss';
+
+.check {
+    width: 47%;
+    height: 54px;
+    display: flex;
+    align-items: center;
+
+    label {
+        font-size: 16px;
+        font-weight: 600;
+        text-transform: capitalize;
+    }
+}

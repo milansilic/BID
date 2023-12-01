@@ -1,0 +1,104 @@
+.host-auth {
+    display: block;
+    overflow: hidden;
+}
+
+.cent-abs {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+}
+
+.cent-fl {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.flex-space-between {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+}
+
+.col-one,
+.col-two {
+    display: grid;
+}
+
+.col-one {
+    grid-template-columns: 1fr;
+}
+
+.col-two {
+    grid-template-columns: 1fr 1fr;
+}
+
+.td-action {
+    width: 100px;
+
+    button {
+        width: 16px;
+        height: 16px;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+
+        @media (hover:hover) {
+            cursor: pointer;
+        }
+    }
+
+    button:first-of-type {
+        background-image: url(../assets/icons/edit.svg);
+        margin-right: 12px;
+    }
+
+    button:last-of-type {
+        background-image: url(../assets/icons/delete.svg);
+    }
+}
+
+.shadow {
+    box-shadow: 0px 10px 30px -10px rgba(0, 0, 0, 0.1);
+}
+
+.pointer {
+    @media (hover:hover) {
+        cursor: pointer;
+    }
+}
+
+.black {
+    background-color: var(--black);
+}
+
+.green {
+    background-color: var(--green);
+}
+
+.blue {
+    background-color: var(--blue);
+}
+
+.red {
+    background-color: var(--red);
+}
+
+.none {
+    display: none;
+}

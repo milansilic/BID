@@ -1,0 +1,28 @@
+<h4>Number of vehicles per type</h4>
+
+<img class="filter pointer" src="../../../assets/icons/filter.svg" alt="filter">
+
+<ul>
+    <li class="pointer" *ngFor="let cl of clients; let i = index" (click)="selectOption(i)"> 
+        <span [style.--dotCol]="lineColors[i]"></span>
+        {{ cl }} vehicles
+        <b>{{ dataValues[i] }}</b>
+    </li>
+</ul>
+
+<div class="chart-container">
+    <canvas id="chart-number-of-vehicles"></canvas>
+    <div class="cent-abs">
+        <span class="cent-abs cent-fl"
+            *ngFor="let vp of valuePercs; let i = index" 
+            [style.--distance1]="i * (360 / noOfVals) + (180 / noOfVals) + 'deg'"
+            [style.--distance2]="(-vp/34) - 3.6 + 'vw'"
+            [style.--distance3]="(-vp/30) - 2.4 + 'vw'">
+                <p [style.--ratationReset]="-i * (360 / noOfVals) + 60 + 'deg'">{{ vp }}%</p>
+        </span>
+    </div>
+    <div class="centralValue cent-abs cent-fl">
+        <b>{{ centralValue1 }}</b>
+        <small>{{ centralValue2 }}</small>
+    </div>
+</div>

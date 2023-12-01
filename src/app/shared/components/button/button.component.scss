@@ -1,0 +1,67 @@
+@import '../../../../styles/classes.scss';
+
+:host>* {
+   border-radius: 8px;
+   width: auto;
+   height: 4.5vh;
+   padding: 0 10px;
+   font-family: 'Helvetica Neue LT Pro';
+   font-size: 9px;
+   font-size: clamp(9px, 1.1vw, 12px);
+   font-weight: 600;
+   letter-spacing: .17em;
+   cursor: pointer;
+
+   @media (min-width: 810px) {
+      height: 54px;
+      padding: 0 10px;
+      padding: 0 clamp(10px, 1.9vmax, 37px);
+   }
+
+   @media (orientation: landscape) {
+      border-radius: 10px;
+   }
+
+   img {
+      display: block;
+      width: 26px;
+      height: auto;
+      margin-right: 13px;
+      margin-left: -8px;
+   }
+}
+
+.confirm,
+.confirm-wide {
+   background-color: var(--darker-blue);
+   color: var(--white);
+
+   @media (orientation: portrait) {
+      margin-top: 1vh;
+   }
+}
+
+.confirm-wide {
+   width: 100%;
+}
+
+.banner-button {
+   background-color: var(--white);
+   color: var(--black);
+}
+
+.next {
+   background-color: var(--green);
+   color: var(--white);
+}
+
+.cancel {
+   background-color: var(--dark-grey);
+   color: var(--white);
+}
+
+.populate-button {
+   background-color: var(--white);
+   color: var(--black);
+   border: 1px solid var(--black);
+}

@@ -1,0 +1,520 @@
+<section class="create-order" *ngIf="showForm">
+   <h2>create order</h2>
+
+   <form class="col-one form" [formGroup]="baseInfoForm">
+      <fieldset class="base-info">
+         <h4>base info - principal</h4>
+         <main>
+            <app-select placeholderName="client" marker="yes" type="required" [formGroup]="baseInfoForm"
+               [formControlName]="'clientId'" [dropdownValues]="clients"></app-select>
+            <app-select placeholderName="status" marker="yes" type="required" [formGroup]="baseInfoForm"
+               [formControlName]="'status'" [dropdownValues]="orderStatuses"></app-select>
+            <app-select placeholderName="transport type" marker="yes" type="required" [formGroup]="baseInfoForm"
+               [formControlName]="'transportType'" [dropdownValues]="transportTypes"></app-select>
+            <app-select placeholderName="order maker" marker="yes" type="required" [formGroup]="baseInfoForm"
+               [dropdownValues]="orderMakers" [formControlName]="'userId'"></app-select>
+         </main>
+      </fieldset>
+   </form>
+
+   <form class="col-one form" [formGroup]="transportInfoForm">
+      <fieldset class="base-info">
+         <h4>transport info</h4>
+         <main>
+            <div class="transport-info-container">
+               <div class="transport-info">
+                  <app-select class="small-order-field" placeholderName="currency" marker="yes" type="required"
+                     [dropdownValues]="currencies" [formGroup]="transportInfoForm" [formControlName]="'currency'">
+                  </app-select>
+                  <app-input inputType="number" placeholderName="price" marker="yes" type="required"
+                     [formGroup]="transportInfoForm" [formControlName]="'price'"></app-input>
+               </div>
+               <div class="additional-costs-title">
+                  <h6>additional cost</h6>
+                  <button class="add-btn" (click)="openAddCost()">add additional cost<span>+</span></button>
+               </div>
+
+               <table class="table">
+                  <tr>
+                     <th>Client Name</th>
+                     <th>Supplier Name</th>
+                     <th>actions</th>
+                  </tr>
+                  <tr *ngFor="let cost of additionalCosts;let i = index;">
+                     <td>
+                        {{ cost.clientName}}
+                     </td>
+                     <td>{{ cost.supplierName }}</td>
+                     <td class="td-action">
+                        <button (click)="updateAdditionalCost(cost)"></button>
+                        <button (click)="deleteAdditionalCost(cost)"></button>
+                     </td>
+                  </tr>
+               </table>
+            </div>
+         </main>
+      </fieldset>
+   </form>
+
+   <div class="col-two form" style="display: flex; flex-flow:column">
+      <header><button class="add-btn" (click)="addLoadingInfoForm()">add loading info<span>+</span></button></header>
+      <form [formGroup]="loadingInfoForm" (ngSubmit)="submitLoadingInfo()">
+
+         <ng-container formArrayName="loadingInfo">
+
+            <div style="display:flex;" *ngFor="let loadingInfoFormGroup of loadingInfo.controls; let i = index;">
+               <ng-container [formGroup]="$any(loadingInfoFormGroup)">
+
+                  <fieldset class="loading-info">
+                     <h4>loading info - principal {{i > 0 ? '#' + i : ''}}</h4>
+                     <main>
+                        <app-datepicker labelText="date of loading" type="required" marker="yes"
+                           [formGroup]="$any(loadingInfoFormGroup)" [formControlName]="'dateOfLoading'">
+                        </app-datepicker>
+
+                        <app-select placeholderName="supplier" marker="yes" type="required" [dropdownValues]="clients"
+                           [formGroup]="$any(loadingInfoFormGroup)" [formControlName]="'supplierId'"></app-select>
+                        <app-select placeholderName="loading company" marker="yes" type="required"
+                           [dropdownValues]="clients" [formGroup]="$any(loadingInfoFormGroup)"
+                           [formControlName]="'loadingCompanyId'"></app-select>
+                        <app-input inputType="text" placeholderName="ref number" marker="yes" type="required"
+                           [formGroup]="$any(loadingInfoFormGroup)" [formControlName]="'refNumber'"></app-input>
+                        <app-input class="two-thirds" inputType="text" placeholderName="tour number" marker="yes"
+                           [disabled]="true" type="required" [formGroup]="$any(loadingInfoFormGroup)"
+                           [formControlName]="'tourNumber'">
+                        </app-input>
+                        <app-input class="one-third" inputType="text" placeholderName="percentage" marker="yes"
+                           type="required" [formGroup]="$any(loadingInfoFormGroup)"
+                           [formControlName]="'tourPercentage'">
+                        </app-input>
+                        <app-button *ngIf="i === 0" btnClass="confirm-wide" btnText="connect with tour" type="button"
+                           (click)="openConnectWithTour(connectWithTourTypeEnum.Loading, i)">
+                        </app-button>
+                     </main>
+                  </fieldset>
+                  <fieldset>
+                     <h4>export customs {{i > 0 ? '#' + i : ''}}</h4>
+                     <main>
+                        <app-select placeholderName="customs agent" marker="yes" type="required"
+                           [formGroup]="$any(loadingInfoFormGroup)" [formControlName]="'customsAgentId'"
+                           [dropdownValues]="clients"></app-select>
+                        <app-select placeholderName="customs address" type="required" [dropdownValues]="dutyAddresses"
+                           [formControlName]="'dutyId'" [formGroup]="$any(loadingInfoFormGroup)"></app-select>
+                        <app-select placeholderName="type of customs procedure" marker="yes" type="required"
+                           [dropdownValues]="dutyProcedures" [formGroup]="$any(loadingInfoFormGroup)"
+                           [formControlName]="'dutyType'">
+                        </app-select>
+                     </main>
+                  </fieldset>
+
+               </ng-container>
+            </div>
+         </ng-container>
+
+      </form>
+   </div>
+
+   <div class="col-two form" style="display: flex; flex-flow:column">
+      <header><button class="add-btn" (click)="addReloadingInfoForm()">add reloading info<span>+</span></button>
+      </header>
+      <form [formGroup]="reloadingInfoForm" (ngSubmit)="submitReloadingInfo()">
+
+         <ng-container formArrayName="reloadingInfo">
+
+            <div style="display:flex;" *ngFor="let reloadingInfoFormGroup of reloadingInfo.controls; let i = index;">
+               <ng-container [formGroup]="$any(reloadingInfoFormGroup)">
+
+
+                  <fieldset class="loading-info">
+                     <h4>reloading info {{i > 0 ? '#' + i : ''}}</h4>
+                     <main>
+                        <app-datepicker labelText="date of loading" type="required" marker="yes"
+                           [formGroup]="$any(reloadingInfoFormGroup)" [formControlName]="'dateOfLoading'">
+                        </app-datepicker>
+                        <app-datepicker labelText="date of unloading" type="required" marker="yes"
+                           [formGroup]="$any(reloadingInfoFormGroup)" [formControlName]="'dateOfUnloading'">
+                        </app-datepicker>
+                        <app-select placeholderName="reloading company" marker="yes" type="required"
+                           [dropdownValues]="clients" [formGroup]="$any(reloadingInfoFormGroup)"
+                           [formControlName]="'reloadingCompanyId'">
+                        </app-select>
+                        <app-input inputType="text" placeholderName="ref number" marker="yes" type="required"
+                           [formGroup]="$any(reloadingInfoFormGroup)" [formControlName]="'refNumber'"></app-input>
+                        <app-input class="two-thirds" inputType="text" [disabled]="true" placeholderName="tour number"
+                           marker="yes" type="required" [formGroup]="$any(reloadingInfoFormGroup)"
+                           [formControlName]="'tourNumber'">
+                        </app-input>
+                        <app-input class="one-third" inputType="text" placeholderName="percentage" marker="yes"
+                           type="required" [formGroup]="$any(reloadingInfoFormGroup)"
+                           [formControlName]="'tourPercentage'"></app-input>
+                        <app-button btnClass="confirm-wide" btnText="connect with tour" type="button"
+                           (click)="openConnectWithTour(connectWithTourTypeEnum.Reloading, i)">
+                        </app-button>
+                     </main>
+                  </fieldset>
+                  <fieldset>
+                     <h4>customs {{i > 0 ? '#' + i : ''}}</h4>
+                     <main>
+                        <app-select placeholderName="customs agent" marker="yes" type="required"
+                           [dropdownValues]="clients" [formGroup]="$any(reloadingInfoFormGroup)"
+                           [formControlName]="'customsAgentId'"></app-select>
+                        <app-select placeholderName="customs address" type="required"
+                           [formGroup]="$any(reloadingInfoFormGroup)" [dropdownValues]="dutyAddresses"
+                           [formControlName]="'dutyId'"></app-select>
+                        <app-select placeholderName="type of customs procedure" marker="yes" type="required"
+                           [dropdownValues]="dutyProcedures" [formGroup]="$any(reloadingInfoFormGroup)"
+                           [formControlName]="'dutyType'">
+                        </app-select>
+                     </main>
+                  </fieldset>
+
+
+               </ng-container>
+            </div>
+         </ng-container>
+
+      </form>
+   </div>
+
+   <div class="col-two form" style="display: flex; flex-flow:column">
+      <header><button class="add-btn" (click)="addUnloadingInfoForm()">add unloading info<span>+</span></button>
+      </header>
+
+      <form [formGroup]="unloadingInfoForm" (ngSubmit)="submitUnloadingInfo()">
+         <ng-container formArrayName="unloadingInfo">
+            <div style="display:flex;" *ngFor="let unloadingInfoFormGroup of unloadingInfo.controls; let i = index;">
+               <ng-container [formGroup]="$any(unloadingInfoFormGroup)">
+                  <fieldset class="loading-info">
+                     <h4>unloading info</h4>
+                     <main>
+                        <app-datepicker labelText="date of unloading" type="required" marker="yes"
+                           [formGroup]="$any(unloadingInfoFormGroup)" [formControlName]="'dateOfUnloading'">
+                        </app-datepicker>
+                        <app-select placeholderName="importer" marker="yes" type="required"
+                           [formGroup]="$any(unloadingInfoFormGroup)" [formControlName]="'importerId'"
+                           [dropdownValues]="clients"></app-select>
+                        <app-select placeholderName="unloading company" marker="yes" type="required"
+                           [dropdownValues]="clients" [formGroup]="$any(unloadingInfoFormGroup)"
+                           [formControlName]="'unloadingCompanyId'">
+                        </app-select>
+                        <app-input inputType="text" placeholderName="ref number" marker="yes" type="required"
+                           [formGroup]="$any(unloadingInfoFormGroup)" [formControlName]="'refNumber'"></app-input>
+
+                        <app-input inputType="text" placeholderName="tour number" marker="yes" type="required"
+                           [disabled]="true" [formGroup]="$any(unloadingInfoFormGroup)"
+                           [formControlName]="'tourNumber'"></app-input>
+
+                        <app-input inputType="text" placeholderName="percentage" marker="yes" type="required"
+                           [formGroup]="$any(unloadingInfoFormGroup)" [formControlName]="'tourPercentage'"></app-input>
+                     </main>
+                  </fieldset>
+                  <fieldset>
+                     <h4>import customs {{i > 0 ? '#' + i : ''}}</h4>
+                     <main>
+                        <app-select placeholderName="customs agent" marker="yes" type="required"
+                           [dropdownValues]="clients" [formGroup]="$any(unloadingInfoFormGroup)"
+                           [formControlName]="'customsAgentId'"></app-select>
+                        <app-select placeholderName="customs address" type="required"
+                           [formGroup]="$any(unloadingInfoFormGroup)" [dropdownValues]="dutyAddresses"
+                           [formControlName]="'dutyId'"></app-select>
+                        <app-select placeholderName="type of customs procedure" marker="yes" type="required"
+                           [dropdownValues]="dutyProcedures" [formGroup]="$any(unloadingInfoFormGroup)"
+                           [formControlName]="'dutyType'">
+                        </app-select>
+                     </main>
+                  </fieldset>
+               </ng-container>
+            </div>
+         </ng-container>
+      </form>
+
+
+
+
+   </div>
+
+   <form class="col-one form" [formGroup]="orderGoodsForm">
+      <fieldset class="base-info">
+         <h4>goods</h4>
+         <main>
+            <app-input inputType="text" placeholderName="type of goods" marker="yes" type="required"
+               [formGroup]="orderGoodsForm" [formControlName]="'goods'"></app-input>
+            <h6>type of packing</h6>
+            <button class="add-btn" (click)="openAddPackage()">add additional package<span>+</span></button>
+         </main>
+      </fieldset>
+      <fieldset class="base-info">
+
+         <table class="table">
+            <tr>
+               <th>type</th>
+               <th>number</th>
+               <th>actions</th>
+            </tr>
+            <tr *ngFor="let package of additionalPackages;let i = index;">
+               <td>
+                  {{ package.typeDisplayLabel}}
+               </td>
+               <td>{{ package.number }}</td>
+               <td class="td-action">
+                  <button (click)="updateAdditionalPackage(package)"></button>
+                  <button (click)="deleteAdditionalPackage(i)"></button>
+               </td>
+            </tr>
+         </table>
+
+      </fieldset>
+      <div *ngIf="additionalPackages.length">
+         Total Weight: {{packagesTotalWeight}} kg
+      </div>
+      <fieldset class="goods">
+         <main>
+            <!-- <app-input inputType="text" placeholderName="total weight" type="required" [formGroup]="orderGoodsForm"
+               [formControlName]="'totalWeight'"></app-input> -->
+            <app-input inputType="text" placeholderName="loading meters" marker="yes" type="required"
+               [formGroup]="orderGoodsForm" [formControlName]="'loadingMeters'"></app-input>
+            <span>
+               <app-select placeholderName="currency" marker="yes" type="required" [formGroup]="orderGoodsForm"
+                  [formControlName]="'currency'" [dropdownValues]="currencies"></app-select>
+               <app-input inputType="number" placeholderName="price" marker="yes" type="required"
+                  [formGroup]="orderGoodsForm" [formControlName]="'valueOfGoods'"></app-input>
+            </span>
+            <div class="check">
+               <input class="cent-fl" type="checkbox" id="adr" name="adr" value="" [formGroup]="orderGoodsForm"
+                  [formControlName]="'isADR'" (change)="AdrChanged()">
+               <label class="pointer" for="adr">is ADR</label><br>
+            </div>
+            <app-input inputType="text" placeholderName="adr weight" marker="yes" type="required"
+               [formGroup]="orderGoodsForm" [formControlName]="'adrWeight'" [disabled]="!isADR"
+               (change)="calculateAdr()"></app-input>
+            <app-select placeholderName="class" marker="yes" type="required" [formGroup]="orderGoodsForm"
+               [formControlName]="'adrClass'" [dropdownValues]="adrClasses"></app-select>
+            <app-input inputType="number" placeholderName="un number" marker="yes" type="required"
+               [formGroup]="orderGoodsForm" [formControlName]="'unNumber'" [disabled]="!isADR"
+               (change)="calculateAdr()">
+            </app-input>
+            <div>
+               ADR:
+               <span *ngIf="vehicleIsAdr">YES</span>
+               <span *ngIf="vehicleIsAdr === false">NO</span>
+               <span *ngIf="vehicleIsAdr === null">INVALID</span>
+            </div>
+            <app-textarea placeholderName="notes" type="required" [formGroup]="orderGoodsForm"
+               [formControlName]="'notes'"></app-textarea>
+         </main>
+      </fieldset>
+   </form>
+
+   <form class="file-loader col-one shadow form">
+      <header>
+         <h4>files</h4>
+         <button class="add-btn" (click)="openAddFiles()">add files<span>+</span></button>
+      </header>
+
+      <fieldset>
+         <table class="table">
+            <tr>
+               <th>type</th>
+               <th>name</th>
+               <th>size</th>
+               <th>actions</th>
+            </tr>
+            <tr *ngFor="let file of files;let i = index;">
+               <td>
+                  <span [class.black]="file.type==='jpg' || file.type==='jpeg' || file.type==='png'"
+                     [class.green]="file.type==='xls' || file.type==='xlsx' || file.type==='ods'"
+                     [class.blue]="file.type==='doc' || file.type==='docx'" [class.red]="file.type==='pdf'">
+                     {{ file.type }}
+                  </span>
+               </td>
+               <td>{{ file.name }}</td>
+               <td>{{ file.size | number : '1.2-2'}} MB</td>
+               <td class="td-action">
+                  <button (click)="editFileRow(i)"></button>
+                  <button (click)="deleteUploadRow(i)"></button>
+               </td>
+            </tr>
+         </table>
+      </fieldset>
+   </form>
+   <footer>
+      <!-- <app-button btnClass="next" btnText="print" btnImgUrl="../../../assets/icons/print.svg" type="submit">
+      </app-button>
+      <app-button btnClass="next" btnText="invoicing" btnImgUrl="../../../assets/icons/print.svg" type="submit"
+         style="margin-right: auto;"></app-button> -->
+      <app-button btnClass="confirm" btnText="save&close" type="button" (click)="submitOrdersInfo()"></app-button>
+      <app-button routerLink="../orders" btnClass="cancel" btnText="cancel" type="button"></app-button>
+   </footer>
+</section>
+
+<section class="order-info" *ngIf="showForm">
+   <h2>order info</h2>
+   <section class="order-info-wrapper">
+      <section class="info-point">
+         <h4>loading info</h4>
+         <article>
+            <header>
+               <h6>Ikea</h6>
+               <img src="../../../assets/icons/info.svg" alt="info">
+            </header>
+            <main>
+               <ul>
+                  <li><b>Service options: </b>In-store shopping - Kerbside pickup - Delivery</li><br>
+                  <li><b>Address: </b>Ulica Astrid Lingen11, RS - 11231 Beograd, Srbija</li><br>
+                  <li><b>Hours: </b>Open - Closes 9PM</li><br>
+                  <li><b>Phone: </b>011 7555444</li><br>
+               </ul>
+               <button>More Details</button>
+            </main>
+            <footer>
+               <ul>
+                  <li><b>Loading date:</b></li><br>
+                  <li><b>Reference number:</b></li>
+               </ul>
+            </footer>
+         </article>
+      </section>
+      <section class="info-point">
+         <h4>export customs</h4>
+         <article>
+            <header>
+               <h6>Horgos</h6>
+               <img src="../../../assets/icons/info.svg" alt="info">
+            </header>
+            <main>
+               <ul>
+                  <li><b>Service options: </b>In-store shopping - Kerbside pickup - Delivery</li><br>
+                  <li><b>Address: </b>Ulica Astrid Lingen11, RS - 11231 Beograd, Srbija</li><br>
+                  <li><b>Hours: </b>Open - Closes 9PM</li><br>
+                  <li><b>Phone: </b>011 7555444</li><br>
+               </ul>
+               <button>More Details</button>
+            </main>
+            <footer>
+               <ul>
+                  <li><b>Loading date:</b></li><br>
+                  <li><b>Reference number:</b></li>
+               </ul>
+            </footer>
+         </article>
+      </section>
+      <section class="info-point">
+         <h4>reloading info</h4>
+         <article>
+            <header>
+               <h6>Ikea</h6>
+               <img src="../../../assets/icons/info.svg" alt="info">
+            </header>
+            <main>
+               <ul>
+                  <li><b>Service options: </b>In-store shopping - Kerbside pickup - Delivery</li><br>
+                  <li><b>Address: </b>Ulica Astrid Lingen11, RS - 11231 Beograd, Srbija</li><br>
+                  <li><b>Hours: </b>Open - Closes 9PM</li><br>
+                  <li><b>Phone: </b>011 7555444</li><br>
+               </ul>
+               <button>More Details</button>
+            </main>
+            <footer>
+               <ul>
+                  <li><b>Loading date:</b></li><br>
+                  <li><b>Reference number:</b></li>
+               </ul>
+            </footer>
+         </article>
+      </section>
+      <section class="info-point">
+         <h4>reloading customs</h4>
+         <article>
+            <header>
+               <h6>Horgos</h6>
+               <img src="../../../assets/icons/info.svg" alt="info">
+            </header>
+            <main>
+               <ul>
+                  <li><b>Service options: </b>In-store shopping - Kerbside pickup - Delivery</li><br>
+                  <li><b>Address: </b>Ulica Astrid Lingen11, RS - 11231 Beograd, Srbija</li><br>
+                  <li><b>Hours: </b>Open - Closes 9PM</li><br>
+                  <li><b>Phone: </b>011 7555444</li><br>
+               </ul>
+               <button>More Details</button>
+            </main>
+            <footer>
+               <ul>
+                  <li><b>Loading date:</b></li><br>
+                  <li><b>Reference number:</b></li>
+               </ul>
+            </footer>
+         </article>
+      </section>
+      <section class="info-point">
+         <h4>import customs</h4>
+         <article>
+            <header>
+               <h6>Horgos</h6>
+               <img src="../../../assets/icons/info.svg" alt="info">
+            </header>
+            <main>
+               <ul>
+                  <li><b>Service options: </b>In-store shopping - Kerbside pickup - Delivery</li><br>
+                  <li><b>Address: </b>Ulica Astrid Lingen11, RS - 11231 Beograd, Srbija</li><br>
+                  <li><b>Hours: </b>Open - Closes 9PM</li><br>
+                  <li><b>Phone: </b>011 7555444</li><br>
+               </ul>
+               <button>More Details</button>
+            </main>
+            <footer>
+               <ul>
+                  <li><b>Loading date:</b></li><br>
+                  <li><b>Reference number:</b></li>
+               </ul>
+            </footer>
+         </article>
+      </section>
+      <section class="info-point">
+         <h4>unloading info</h4>
+         <article>
+            <header>
+               <h6>Ikea</h6>
+               <img src="../../../assets/icons/info.svg" alt="info">
+            </header>
+            <main>
+               <ul>
+                  <li><b>Service options: </b>In-store shopping - Kerbside pickup - Delivery</li><br>
+                  <li><b>Address: </b>Ulica Astrid Lingen11, RS - 11231 Beograd, Srbija</li><br>
+                  <li><b>Hours: </b>Open - Closes 9PM</li><br>
+                  <li><b>Phone: </b>011 7555444</li><br>
+               </ul>
+               <button>More Details</button>
+            </main>
+            <footer>
+               <ul>
+                  <li><b>Loading date:</b></li><br>
+                  <li><b>Reference number:</b></li>
+               </ul>
+            </footer>
+         </article>
+      </section>
+   </section>
+</section>
+
+<additional-costs-modal *ngIf="showAdditionalCostModal" [clients]="clients" [additionalCost]="selectedAdditionalCost"
+   (closeModalEvnt)="closeAddCost()" (additionalCostsSaved)="additionalCostsSaved($event)">
+</additional-costs-modal>
+
+<additional-package-modal *ngIf="showAdditionalPackageModal" (closeModalEvnt)="closeAddPackage()"
+   [additionalPackage]="selectedAdditionalPackage" (additionalPackageSaved)="additionalPackageSaved($event)">
+</additional-package-modal>
+
+<add-files-modal *ngIf="addFilesModal" [selectedFile]="selectedFile" (sendObjectEvent)="updateFileObject($event)"
+   (closeModalEvnt)="closeAddFiles()">
+</add-files-modal>
+
+<connect-tour-modal *ngIf="showConnectTourModal" (tourSelected)="tourSelected($event)"
+   (closeModalEvnt)="closeConnectTour()">
+</connect-tour-modal>
+
+<mask *ngIf="showAdditionalCostModal || showAdditionalPackageModal || addFilesModal || showConnectTourModal"></mask>
+
+<progress-spinner *ngIf="spinner"></progress-spinner>
+
+<progress-spinner *ngIf="!showForm"></progress-spinner>

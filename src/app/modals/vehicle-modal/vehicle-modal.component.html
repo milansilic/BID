@@ -1,0 +1,173 @@
+<form class="vehicles-modal" *ngIf="showForm" [formGroup]="createVehicleForm" (ngSubmit)="submitVehicleInfo()">
+   <header class="flex-space-between">
+      <h4>{{ modalType }} Vehicle</h4>
+      <img class="pointer" src="../../../assets/icons/x.svg" alt="close modal" (click)="closeModal(false)">
+   </header>
+   <ul class="flex-space-between">
+      <li [class.active]="activeTab === tabsRef.general" (click)="changeCard(tabsRef.general)">general</li>
+      <li [class.active]="activeTab === tabsRef.inspection" (click)="changeCard(tabsRef.inspection)">inspection</li>
+      <li [class.active]="activeTab === tabsRef.licenses" (click)="changeCard(tabsRef.licenses)">licenses</li>
+      <li [class.active]="activeTab === tabsRef.additionalInfo" (click)="changeCard(tabsRef.additionalInfo)">additional
+         info</li>
+      <li [class.active]="activeTab === tabsRef.insurance" (click)="changeCard(tabsRef.insurance)">insurance</li>
+      <li [class.active]="activeTab === tabsRef.property" (click)="changeCard(tabsRef.property)">property</li>
+   </ul>
+   <div class="form-core">
+      <div class="card-container flex-space-between" *ngIf="activeTab === tabsRef.general">
+         <app-input inputType="text" placeholderName="plate number" marker="yes" type="required"
+            [formGroup]="createVehicleForm" [formControlName]="'plateNumber'"></app-input>
+         <app-datepicker labelText="reg. date" type="required" marker="yes" [formGroup]="createVehicleForm"
+            [formControlName]="'regDate'"></app-datepicker>
+         <app-select placeholderName="type" marker="yes" type="required" [formGroup]="createVehicleForm"
+            [formControlName]="'type'" [dropdownValues]="vehicleTypes"></app-select>
+         <app-input placeholderName="reg. place" marker="yes" type="required" [formGroup]="createVehicleForm"
+            [formControlName]="'regPlace'"></app-input>
+         <app-input inputType="number" placeholderName="total capacity" marker="yes" type="required"
+            [formGroup]="createVehicleForm" [formControlName]="'capacity'"></app-input>
+         <app-datepicker labelText="reg. valid until" type="required" marker="yes" [formGroup]="createVehicleForm"
+            [formControlName]="'regExpiryDate'"></app-datepicker>
+         <app-input inputType="number" placeholderName="own carrying capacity" marker="yes" type="required"
+            [formGroup]="createVehicleForm" [formControlName]="'carryCapacity'"></app-input>
+         <app-input inputType="text" placeholderName="traffic license number" marker="yes" type="required"
+            [formGroup]="createVehicleForm" [formControlName]="'licenseNumber'"></app-input>
+         <app-input inputType="number" placeholderName="loading capacity" marker="yes" [formGroup]="createVehicleForm"
+            [formControlName]="'carryCapacity'"></app-input>
+      </div>
+      <div class="card-container flex-space-between" *ngIf="activeTab === tabsRef.inspection">
+         <app-datepicker labelText="tehnical inspection date" type="required" marker="yes"
+            [formGroup]="createVehicleForm" [formControlName]="'tehnicalInspectionDate'"></app-datepicker>
+         <app-datepicker labelText="pp device sertificate exp.date" type="required" marker="yes"
+            [formGroup]="createVehicleForm" [formControlName]="'ppdeviceSertificateExpiryDate'"></app-datepicker>
+         <app-datepicker labelText="tehnical inspection exp.date" type="required" marker="yes"
+            [formGroup]="createVehicleForm" [formControlName]="'tehnicalInspectionExpiryDate'"></app-datepicker>
+         <app-datepicker labelText="pp device sertificate exp.date II" type="required" marker="yes"
+            [formGroup]="createVehicleForm" [formControlName]="'ppdeviceSertificateIiexpiryDate'"></app-datepicker>
+         <app-datepicker labelText="date of 6 month inspection" type="required" marker="yes"
+            [formGroup]="createVehicleForm" [formControlName]="'sixMonthInspectionDate'"></app-datepicker>
+         <app-datepicker labelText="exp. tachograph certificate" type="required" marker="yes"
+            [formGroup]="createVehicleForm" [formControlName]="'tachographCertificateExpiryDate'"></app-datepicker>
+         <app-datepicker labelText="exp.date of 6m inspection" type="required" marker="yes"
+            [formGroup]="createVehicleForm" [formControlName]="'sixMonthInspectionExpiryDate'"></app-datepicker>
+         <app-datepicker labelText="exp.of first aid" type="required" marker="yes" [formGroup]="createVehicleForm"
+            [formControlName]="'firstAidexpiryDate'"></app-datepicker>
+      </div>
+      <div class="card-container flex-space-between" *ngIf="activeTab === tabsRef.licenses">
+         <app-input inputType="number" placeholderName="white certificate number" marker="yes" type="required"
+            [formGroup]="createVehicleForm" [formControlName]="'whiteCertificateNumber'"></app-input>
+         <app-input inputType="number" placeholderName="tir number" marker="yes" type="required"
+            [formGroup]="createVehicleForm" [formControlName]="'tirnumber'"></app-input>
+         <app-datepicker labelText="white certificate valid until" type="required" marker="yes"
+            [formGroup]="createVehicleForm" [formControlName]="'whiteCertificateExpiryDate'"></app-datepicker>
+         <app-datepicker labelText="tir valid until" type="required" marker="yes" [formGroup]="createVehicleForm"
+            [formControlName]="'tirexpiryDate'"></app-datepicker>
+      </div>
+      <div class="card-container flex-space-between" *ngIf="activeTab === tabsRef.additionalInfo">
+         <app-input inputType="text" placeholderName="producer" marker="yes" type="required"
+            [formGroup]="createVehicleForm" [formControlName]="'producer'"></app-input>
+         <app-input inputType="text" placeholderName="model" marker="yes" type="required"
+            [formGroup]="createVehicleForm" [formControlName]="'model'"></app-input>
+         <app-input inputType="text" placeholderName="color of vehicle" marker="yes" type="required"
+            [formGroup]="createVehicleForm" [formControlName]="'color'"></app-input>
+         <app-input inputType="text" placeholderName="chassis number" marker="yes" type="required"
+            [formGroup]="createVehicleForm" [formControlName]="'chassisNumber'"></app-input>
+         <app-input inputType="text" placeholderName="engine number" marker="yes" type="required"
+            [formGroup]="createVehicleForm" [formControlName]="'engineNumber'"></app-input>
+         <app-input inputType="number" placeholderName="year of production" marker="yes" type="required"
+            [formGroup]="createVehicleForm" [formControlName]="'yearOfProduction'"></app-input>
+         <app-input inputType="text" placeholderName="tire dimenstions" marker="yes" type="required"
+            [formGroup]="createVehicleForm" [formControlName]="'tireDimensions'"></app-input>
+         <app-input inputType="number" placeholderName="number of axle" marker="yes" type="required"
+            [formGroup]="createVehicleForm" [formControlName]="'numberOfAxle'"></app-input>
+         <app-input inputType="text" placeholderName="garage number" marker="yes" type="required"
+            [formGroup]="createVehicleForm" [formControlName]="'garageNumber'"></app-input>
+         <app-input inputType="number" placeholderName="tank volume" marker="yes" type="required"
+            [formGroup]="createVehicleForm" [formControlName]="'tankCapacity'"></app-input>
+         <app-select placeholderName="adr class" marker="yes" type="required" [formGroup]="createVehicleForm"
+            [dropdownValues]="adrClasses" [formControlName]="'adrclassId'"></app-select>
+         <div></div>
+         <h6>termo king</h6>
+         <div></div>
+         <app-input inputType="text" placeholderName="mark" marker="yes" type="required" [formGroup]="createVehicleForm"
+            [formControlName]="'termoKingMark'"></app-input>
+         <app-input inputType="text" placeholderName="type" marker="yes" type="required" [formGroup]="createVehicleForm"
+            [formControlName]="'termoKingType'"></app-input>
+         <h6>dimensions</h6>
+         <fieldset class="flex-space-between dimensions">
+            <app-input inputType="number" placeholderName="lenght" marker="yes" type="required"
+               [formGroup]="createVehicleForm" [formControlName]="'length'"></app-input>
+            <app-input inputType="number" placeholderName="width" marker="yes" type="required"
+               [formGroup]="createVehicleForm" [formControlName]="'width'"></app-input>
+            <app-input inputType="number" placeholderName="height" marker="yes" type="required"
+               [formGroup]="createVehicleForm" [formControlName]="'height'"></app-input>
+         </fieldset>
+      </div>
+      <div class="card-container" *ngIf="activeTab === tabsRef.insurance">
+         <fieldset class="flex-space-between">
+            <hgroup>
+               <h5>mandatory insurance</h5>
+            </hgroup>
+            <button (click)="clearInsuranceFields()">clear all fields</button>
+            <app-select inputType="text" placeholderName="insurance company" marker="yes"
+               [formGroup]="createVehicleForm" [formControlName]="'mandatoryInsuranceCompanyId'"
+               [dropdownValues]="insuranceCompanies"></app-select>
+            <app-input inputType="text" placeholderName="policy number" marker="yes" [formGroup]="createVehicleForm"
+               [formControlName]="'mandatoryPolicyNumber'"></app-input>
+            <app-datepicker labelText="expiry date" type="required" marker="yes" [formGroup]="createVehicleForm"
+               [formControlName]="'mandatoryExpiryDate'"></app-datepicker>
+            <app-input inputType="number" placeholderName="premium grade" marker="yes" [formGroup]="createVehicleForm"
+               [formControlName]="'mandatoryPremiumGrade'"></app-input>
+            <app-input inputType="number" placeholderName="value of premium" marker="yes"
+               [formGroup]="createVehicleForm" [formControlName]="'mandatoryValueOfPremium'"></app-input>
+            <app-button btnClass="cancel" btnText="Add Casco Insurance" btnType="button" (click)="showCasco = true;">
+            </app-button>
+         </fieldset>
+         <fieldset class="flex-space-between" *ngIf="showCasco">
+            <hgroup>
+               <h5>Casco insurance</h5>
+               <h6>optional insurance</h6>
+            </hgroup>
+            <button (click)="clearCasco(true)">clear all fields</button>
+            <app-select inputType="text" placeholderName="insurance company" marker="yes"
+               [formGroup]="createVehicleForm" [formControlName]="'cascoInsuranceCompanyId'"
+               [dropdownValues]="insuranceCompanies"></app-select>
+            <app-input inputType="number" placeholderName="policy number" marker="yes" [formGroup]="createVehicleForm"
+               [formControlName]="'cascoPolicyNumber'"></app-input>
+            <app-datepicker labelText="expiry date" type="required" marker="yes" [formGroup]="createVehicleForm"
+               [formControlName]="'cascoExpiryDate'"></app-datepicker>
+            <app-input inputType="text" placeholderName="premium grade" marker="yes" [formGroup]="createVehicleForm"
+               [formControlName]="'cascoPremiumGrade'"></app-input>
+            <app-input inputType="text" placeholderName="value of premium" marker="yes" [formGroup]="createVehicleForm"
+               [formControlName]="'cascoValueOfPremium'"></app-input>
+            <app-button btnClass="cancel" btnText="delete casko" type="button" (click)="clearCasco()"></app-button>
+         </fieldset>
+      </div>
+      <div class="card-container flex-space-between" *ngIf="activeTab === tabsRef.property">
+         <app-select placeholderName="property type" marker="yes" [formGroup]="createVehicleForm"
+            [formControlName]="'type'" [dropdownValues]="propertyTypes"></app-select>
+         <span></span>
+         <!-- <app-input inputType="date" placeholderName="purchased from" marker="yes"></app-input> -->
+         <app-datepicker labelText="purchased from" type="required" marker="yes" [formGroup]="createVehicleForm"
+            [formControlName]="'purchasedFrom'"></app-datepicker>
+         <app-input inputType="text" placeholderName="value" marker="yes" [formGroup]="createVehicleForm"
+            [formControlName]="'value'"></app-input>
+         <app-input inputType="text" placeholderName="monthly payment" marker="yes" [formGroup]="createVehicleForm"
+            [formControlName]="'monthlyPayment'"></app-input>
+         <app-input inputType="text" placeholderName="value without vat" marker="yes" [formGroup]="createVehicleForm"
+            [formControlName]="'valueWithoutVat'"></app-input>
+         <!-- <app-input inputType="date" placeholderName="date of purchasing" marker="yes"></app-input> -->
+         <app-datepicker labelText="date of purchasing" type="required" marker="yes" [formGroup]="createVehicleForm"
+            [formControlName]="'purchaseDate'"></app-datepicker>
+         <!-- <app-input inputType="date" placeholderName="expiry date of guaranty" marker="yes"></app-input> -->
+         <app-datepicker labelText="date of guaranty" type="required" marker="yes" [formGroup]="createVehicleForm"
+            [formControlName]="'guarantyExpiryDate'"></app-datepicker>
+         <app-input inputType="text" placeholderName="expiry kilometers guaranty" marker="yes"
+            [formGroup]="createVehicleForm" [formControlName]="'kilometersGuarantyExpiry'"></app-input>
+      </div>
+   </div>
+   <footer>
+      <app-button btnClass="confirm" btnText="save&close" btnType="submit" type="submit"></app-button>
+      <app-button *ngIf="activeTab !== tabsRef.property" btnClass="next" btnText="next" btnType="button"
+         (click)="nextClicked()"></app-button>
+      <app-button btnClass="cancel" btnText="cancel" btnType="button" (click)="closeModal(false)"></app-button>
+   </footer>
+</form>

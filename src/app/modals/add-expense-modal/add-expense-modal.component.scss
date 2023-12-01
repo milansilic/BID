@@ -1,0 +1,91 @@
+@import '../../../styles/classes.scss';
+
+.card-container > span {
+  align-items: center;
+  width: 47.5%;
+}
+
+.card-container > span > * {
+  width: 48%;
+}
+
+.check {
+  width: 47%;
+  height: 54px;
+  display: flex;
+  align-items: center;
+
+  label {
+    font-size: 15px;
+    font-weight: 600;
+    text-transform: capitalize;
+  }
+}
+
+.card-container > span > .check {
+  width: 45%;
+}
+
+.card-container > span > .upload-btn {
+  float: left;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  width: 52%;
+  height: 46px;
+  background-color: var(--green);
+  color: var(--white);
+  font-size: 15px;
+  font-weight: 600;
+  text-transform: capitalize;
+  cursor: pointer;
+}
+
+.approval {
+  margin: 4px 0 26px;
+}
+
+.card-container > .upload-table-wrapper {
+  width: 100%;
+  margin-bottom: 2vh;
+}
+
+table,
+table tr {
+  width: 100%;
+}
+
+tr {
+  width: 100%;
+}
+
+th,
+td {
+  border-bottom: 2px solid var(--light-grey);
+  text-align: left;
+}
+
+th {
+  color: rgba(0, 0, 0, 0.54);
+  padding: 10px 0;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 3px;
+}
+
+td {
+  padding: 8px 0;
+  font-weight: 600;
+
+  span {
+    @extend .cent-fl;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    color: var(--white);
+    font-size: 14px;
+    font-weight: 600;
+  }
+}

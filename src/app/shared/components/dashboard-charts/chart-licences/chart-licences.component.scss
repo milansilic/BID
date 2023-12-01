@@ -1,0 +1,66 @@
+@import '../../../../../styles/classes.scss';
+
+:host {
+    @extend .shadow;
+    position: relative;
+    display: block;
+    border-radius: 1.38vw;
+    background-color: var(--white);
+    padding: 1.2vw 1.7vw 0 1vw;
+    grid-column: span 2;
+}
+
+h4 {
+    letter-spacing: -0.02em;
+    margin-bottom: 3%;
+    padding-left: 10px;
+
+    @media (min-width: 1440px) {
+        font-size: 16px;
+        font-size: clamp(16px, 1.4vw, 24px);    
+    }
+}
+
+app-datepicker {
+    position: absolute;
+    top: 11px;
+    display: block;
+    width: 112px;
+
+    &:nth-of-type(1) {
+        right: calc(3.45vw + 122px);    
+    }
+    &:nth-of-type(2) {
+        right: 3.45vw;
+    }
+
+    @media (min-width: 1440px) {
+        width: 7.1vw;
+        &:nth-of-type(1) {
+            right: 11.07vw;
+        }
+    }
+
+    @media (min-width: 1600px) {
+        width: 112px;  
+        
+        &:nth-of-type(1) {
+            right: calc(3.45vw + 122px);    
+        }
+    }
+}
+
+
+
+img.filter {
+    position: absolute;
+    top: 1.45vw;
+    right: 1.45vw;
+    cursor: pointer;
+}
+
+.chart-container {
+    position: relative; 
+    width:100%;
+    height:74%; 
+}

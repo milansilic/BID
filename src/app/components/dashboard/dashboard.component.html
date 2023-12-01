@@ -1,0 +1,60 @@
+<!-- <app-my-dashboard></app-my-dashboard> -->
+
+<h2>my dashboard</h2>
+
+<section class="dashboard">
+   <chart-small 
+      [iconImgSrc]="'../../../../../assets/icons/veh1.svg'" 
+      [title]="'Finish Onboarding'"
+      [number]="finishOnboardingValue">
+   </chart-small>
+   <chart-revenue></chart-revenue>
+   <chart-profit></chart-profit>
+   <chart-small 
+      [iconImgSrc]="'../../../../../assets/icons/veh2.svg'" 
+      [title]="'Number of vehicles'"
+      [number]="numberOfVehicles">
+   </chart-small>
+   <chart-number-of-vehicles></chart-number-of-vehicles>
+   <chart-licences></chart-licences>
+   <chart-average-km></chart-average-km>
+   <chart-small-select 
+      [chartTitle]="'Logistics'"
+      [selectTitle]="'logistics'"
+      [sum]="'72'">
+   </chart-small-select>
+   <chart-orders-per-carrier></chart-orders-per-carrier>
+   <chart-profit-per-client></chart-profit-per-client>  
+   <chart-small-select 
+      [chartTitle]="'Revenue per client'"
+      [selectTitle]="'client'"
+      [sum]="'14'">
+   </chart-small-select>  
+   <chart-orders></chart-orders>
+</section>
+
+<section class="notifications shadow">
+   <h4>Notifications & Alerts</h4>
+   <section>
+      <article class="shadow">
+         <img class="icon" src="../../../assets/icons/ico-alert.svg" alt="alert">
+         <img class="close" src="../../../assets/icons/x.svg" alt="close">
+         <h6>Contract expired date</h6>
+         <p>Please check your contract expiration date ( you have 15 days for renewal ).</p>
+      </article>
+      <article class="shadow">
+         <img class="icon" src="../../../assets/icons/ico-notification.svg" alt="alert">
+         <img class="close" src="../../../assets/icons/x.svg" alt="close">
+         <h6>Expired date of guaranty</h6>
+         <p>Please check your guaranty expiration date ( you have 30 days for renewal ).</p>
+      </article>
+      <article class="shadow">
+         <img class="icon" src="../../../assets/icons/ico-success.svg" alt="alert">
+         <img class="close" src="../../../assets/icons/x.svg" alt="close">
+         <h6>Congratulations</h6>
+         <p>Please check your guaranty expiration date ( you have 15 days for renewal ).</p>
+      </article>
+   </section>
+</section>
+
+<progress-spinner *ngIf="spinner"></progress-spinner>

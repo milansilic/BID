@@ -1,0 +1,45 @@
+<form class="additional-costs-modal" [formGroup]="additionalCostsForm" (ngSubmit)="submitAdditionalCosts($event)">
+    <header class="flex-space-between">
+        <h4>Add Additional Costs</h4>
+        <img class="pointer" (click)="closeModal()" src="../../../assets/icons/x.svg" alt="close modal">
+    </header>
+    <div class="form-core flex-space-between">
+        <div class="card-container flex-space-between">
+            <app-select placeholderName="financial impact" marker="yes" type="required"
+                [formGroup]="additionalCostsForm" formControlName="financialImpactId"
+                [dropdownValues]="financialImpacts">
+            </app-select>
+            <app-select placeholderName="type of cost" marker="yes" type="required" [formGroup]="additionalCostsForm"
+                formControlName="costTypeId" [dropdownValues]="costTypes">
+            </app-select>
+            <h6>inbound expenses</h6>
+            <h6>outbound expenses</h6>
+            <app-select placeholderName="supplier" marker="yes" type="required" [formGroup]="additionalCostsForm"
+                formControlName="inboundClientId" [dropdownValues]="clients">
+            </app-select>
+            <app-select placeholderName="client" marker="yes" type="required" [formGroup]="additionalCostsForm"
+                formControlName="outboundClientId" [dropdownValues]="clients">
+            </app-select>
+            <div class="double-input-field flex-space-between">
+                <app-select placeholderName="currency" marker="yes" type="required" [formGroup]="additionalCostsForm"
+                    [dropdownValues]="currencies" formControlName="inboundCurrency">
+                </app-select>
+                <app-input inputType="number" placeholderName="price" marker="yes" type="required"
+                    [formGroup]="additionalCostsForm" formControlName="inboundPrice">
+                </app-input>
+            </div>
+            <div class="double-input-field flex-space-between">
+                <app-select placeholderName="currency" marker="yes" type="required" [formGroup]="additionalCostsForm"
+                    [dropdownValues]="currencies" formControlName="outboundCurrency">
+                </app-select>
+                <app-input inputType="number" placeholderName="price" marker="yes" type="required"
+                    [formGroup]="additionalCostsForm" formControlName="outboundPrice">
+                </app-input>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <app-button btnClass="confirm" btnText="save&close" type="submit"></app-button>
+        <app-button btnClass="cancel" btnText="cancel" type="submit" (click)="closeModal()"></app-button>
+    </footer>
+</form>

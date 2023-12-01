@@ -1,0 +1,13 @@
+@import '../../../styles/classes.scss';
+
+:host { border: px solid red;
+    display: block;
+    padding-right: 150px;
+}
+
+mat-paginator {border: px solid teal;}
+
+ul#pages-wrapper {
+    display: inline-block;
+}
+

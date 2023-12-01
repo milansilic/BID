@@ -1,0 +1,75 @@
+<div class="connect-tour-modal" *ngIf="showForm">
+  <header class="flex-space-between">
+    <h4>Add Expense</h4>
+    <img class="pointer" (click)="closeModal()" src="../../../assets/icons/x.svg" alt="close modal">
+  </header>
+  <div class="form-core flex-space-between">
+    <form [formGroup]="expenseForm">
+      <div class="card-container flex-space-between">
+        <app-select placeholderName="type" marker="yes" type="required" [formGroup]="expenseForm"
+          [formControlName]="'type'"></app-select>
+        <span class="flex-space-between">
+          <app-select placeholderName="currency" marker="yes" type="required" [formGroup]="expenseForm"
+            [formControlName]="'currency'"></app-select>
+          <app-input placeholderName="price" marker="yes" type="required" inputType="number"
+            [formGroup]="expenseForm" [formControlName]="'price'"></app-input>
+        </span>
+        <app-select placeholderName="service company" marker="yes" type="required" [formGroup]="expenseForm"
+          [formControlName]="'serviceCompanyId'"></app-select>
+        <app-input placeholderName="quantity" marker="yes" type="required" inputType="text"
+          [formGroup]="expenseForm" [formControlName]="'quantity'"></app-input>
+        <app-select placeholderName="payment method" marker="yes" type="required" [formGroup]="expenseForm"
+          [formControlName]="'paymentMethod'"></app-select>
+        <app-select placeholderName="driver" marker="yes" type="required" [formGroup]="expenseForm"
+          [formControlName]="'driverId'"></app-select>
+        <!-- <app-select placeholderName="date" marker="yes" type="required" [formGroup]="expenseForm"
+         [formControlName]="'vehicleId'"></app-select> -->
+        <!-- <app-select placeholderName="type" marker="yes" type="required" [formGroup]="expenseForm"
+         [formControlName]="'vehicleId'"></app-select> -->
+        <!-- proveriti ova gore dva polja  -->
+        <span class="approval flex-space-between">
+          <div class="check">
+            <input class="cent-fl" type="checkbox" id="adr" name="adr" value="" [formGroup]="expenseForm"
+              [formControlName]="'isApproved'">
+            <label class="pointer" for="adr">approved</label><br>
+          </div>
+          <label class="upload-btn" for="">upload/browse</label>
+        </span>
+        <span></span>
+        <!-- <div class="upload-table-wrapper">
+            <table>
+               <tr>
+                  <th>type</th>
+                  <th>name</th>
+                  <th>size</th>
+                  <th>actions</th>
+               </tr>
+               <tr *ngFor="let file of uploadFiles;let i = index;">
+                  <td>
+                     <span [class.black]="file.type==='jpg' || file.type==='jpeg' || file.type==='png'"
+                        [class.green]="file.type==='xls' || file.type==='xlsx' || file.type==='ods'"
+                        [class.blue]="file.type==='doc' || file.type==='docx'" [class.red]="file.type==='pdf'">
+                        {{ file.type }}
+                     </span>
+                  </td>
+                  <td>{{ file.name }}</td>
+                  <td>{{ file.size }}</td>
+                  <td class="td-action">
+                     <button (click)="editUploadRow(i)"></button>
+                     <button (click)="deleteUploadRow(i)"></button>
+                  </td>
+               </tr>
+            </table>
+         </div> -->
+        <app-select placeholderName="pay terms" marker="yes" type="required" [formGroup]="expenseForm"
+          [formControlName]="'payTerms'"></app-select>
+        <app-textarea placeholderName="notes" type="required" inputType="text" [formGroup]="expenseForm"
+          [formControlName]="'notes'"></app-textarea>
+      </div>
+    </form>
+  </div>
+  <footer>
+    <app-button btnClass="confirm" btnText="save&close" type="submit"></app-button>
+    <app-button btnClass="cancel" btnText="cancel" type="submit" (click)="closeModal()"></app-button>
+  </footer>
+</div>

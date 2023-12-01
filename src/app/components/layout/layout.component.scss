@@ -1,0 +1,34 @@
+app-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+app-profile {
+    position: absolute;
+    top: 26px;
+    right: 20px;
+}
+
+figure {
+    display: flex;
+    align-items: center;
+    height: 110px;
+    
+    img {
+        width: 24px;
+        height: auto;
+        transform: translateX(-2.2vw);
+        transition: transform .26s ease-out .1s;
+    }
+
+    img.slide {
+        transform: translateX(0);
+        transition: transform .2s ease-out;
+    }
+}
+
+app-my-dashboard {
+    display: block;
+    margin-bottom: 2vw;
+}

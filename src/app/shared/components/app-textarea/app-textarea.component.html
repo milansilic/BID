@@ -1,0 +1,14 @@
+<div [formGroup]="formGroup">
+   <mat-form-field class="app-textarea">
+      <mat-label>{{ placeholderName }}</mat-label>
+      <textarea 
+         matInput 
+         cdkTextareaAutosize 
+         [formControlName]="formControlName" 
+         #autosize="cdkTextareaAutosize"
+         cdkAutosizeMinRows="1" 
+         cdkAutosizeMaxRows="5" 
+         placeholder="{{ placeholderText }}">
+      </textarea>
+   </mat-form-field>
+</div>

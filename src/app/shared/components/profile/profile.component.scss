@@ -1,0 +1,142 @@
+:host {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+form {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-right: 24px;
+}
+
+.search,
+.search-btn,
+.notification-btn {
+    width: 40px;
+    border-radius: 21px;
+}
+
+.search-btn,
+.notification-btn {
+    height: 40px;
+    border: 1px dashed var(--dark-grey);
+
+    @media (hover: hover) {
+        cursor: pointer;
+    }
+}
+
+.search {
+    height: 44px;
+    padding: 0 14px;
+    font-size: 16px;
+    letter-spacing: .1em;
+    transition: all .25s ease-out;
+}
+
+.search-btn {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    display: block;
+    background: #ffffff url(../../../../assets/icons/search.svg) no-repeat center;
+    background-size: 44%;
+    transform: translate(-2px, -50%);
+}
+
+.open-search {
+    width: 220px;
+    height: 44px;
+    background-color: var(--white);
+}
+
+.notification-btn {
+    position: relative;
+    background: #ffffff url(../../../../assets/icons/notifications.svg) no-repeat center;
+    background-size: 34%;
+    margin-right: 34px;
+
+    span {
+        position: absolute;
+        top: 50%;
+        right: -7px;
+        transform: translate(50%, -50%);
+        border-radius: 8px;
+        background-color: var(--green);
+        color: #ffffff;
+        padding: 2px 5px;
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: .1em;
+    }
+}
+
+picture {
+    width: 52px;
+    height: 52px;
+    border-radius: 26px;
+    overflow: hidden;
+    margin-right: 14px;
+
+    img {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+}
+
+.profile-options {
+    width: 14px;
+    height: 8px;
+    background: #ffffff url(../../../../assets/icons/arrowSmall.svg) no-repeat center;
+    background-size: cover;
+
+    @media (hover: hover) {
+        cursor: pointer;
+    }
+}
+
+nav {
+    position: absolute;
+    top: 120%;
+    right: 0;
+    z-index: 3;
+    overflow: hidden;
+    
+    ul {
+        border-radius: 10px;
+        background-color: var(--white);
+        padding: .48vw .62vw .46vw .64vw;
+        text-align: left;
+        transform: translateY(-100%) scale(.5);
+        opacity: 0;
+        transition: .2s ease-out;
+
+        li {
+            padding: .35em;
+            color: rgba(#142230, .6);
+            font-size: 15px;
+            letter-spacing: -0.01em;
+            text-transform: capitalize;
+            cursor: pointer;
+            transition: .08s;
+        }
+
+        li:hover {
+            color: var(--black);
+            text-decoration: underline;
+        }
+    } 
+
+    ul.opened {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+
+
+
+

@@ -1,0 +1,25 @@
+@import '../../../../../styles/classes.scss';
+
+:host {
+    padding: 4.1% 1.6vw 0 5.2%;
+    grid-template-columns: 13.6vw 1fr;
+
+    @media (min-width:1440px) {
+        grid-template-columns: 10.4vw 1fr;
+    }
+
+    @media (min-width:1840px) {
+        grid-template-columns: 196px 1fr;
+    }
+}
+
+h4 {
+    grid-column: span 2;
+    letter-spacing: -0.02em;
+    margin-bottom: 3.3%;
+    
+    @media (min-width: 1440px) {
+        font-size: 16px;
+        font-size: clamp(16px, 1.4vw, 24px);    
+    }
+}

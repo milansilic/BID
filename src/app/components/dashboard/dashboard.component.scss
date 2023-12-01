@@ -1,0 +1,109 @@
+@import '../../../styles/classes.scss';
+
+:host {
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: space-between;
+   padding-right: 1.5vw;
+}
+
+.dashboard,
+.notifications {
+   display: inline-block;
+}
+
+.dashboard {
+   width: 80.1%;
+   display: grid;
+   justify-content: space-between;
+   grid-template-columns: repeat(4, 23.75%);
+   grid-auto-rows: 16vw;
+   grid-auto-flow: dense;
+   gap: 1.1vw 0;
+
+   @media (min-width: 1440px) {
+      grid-template-columns: repeat(5, 18.75%);
+      grid-auto-rows: 12.7vw;
+   }
+
+   @media (min-width: 1876px) {
+      width: 1346px;
+   }
+}
+
+.notifications {
+   width: 18.8%;
+   border-radius: 1.38vw;
+   background-color: var(--light-grey);
+   padding: 0 .6vw 0 1.6vw;
+   overflow: hidden;
+
+   h4 {
+      width: 12ch;
+      letter-spacing: -0.01em;
+      margin: 1.65vh 0;
+   }
+
+   section {
+      height: 68.2vh;
+      overflow-y: scroll;
+      padding-right: .62vw;
+
+      &::-webkit-scrollbar {
+         width: 4px;
+         margin-left: 12px;
+      }
+
+      &::-webkit-scrollbar-track {
+         background: #e3e5ee;
+      }
+
+      &::-webkit-scrollbar-thumb {
+         background: #ffffff;
+      }
+
+      &::-webkit-scrollbar-thumb:hover {
+         background-color: var(--light-grey);
+      }
+   }
+
+   article {
+      position: relative;
+      border-radius: 22px;
+      background-color: var(--white);
+      padding: 44px 1.4vw 2.2vh;
+      box-shadow: 0px 0px 30px -10px rgba(0, 0, 0, 0.1);
+      margin-bottom: 1.4vh;
+
+      img.icon {
+         position: absolute;
+         top: 13px;
+         left: 16px;
+         width: 24px;
+      }
+
+      img.close {
+         position: absolute;
+         top: 16px;
+         right: 16px;
+         width: 16px;
+         cursor: pointer;
+      }
+
+      h6 {
+         display: block;
+         width: 12ch;
+         font-weight: 600;
+         letter-spacing: -0.01em;
+         margin-bottom: 1vh;
+      }
+
+      p {
+         border-top: 1px solid var(--background);
+         color: var(--black);
+         font-size: 14px;
+         font-weight: 400;
+         padding: 1vh 0;
+      }
+   }
+}

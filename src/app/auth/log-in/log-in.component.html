@@ -1,0 +1,22 @@
+<section class="auth-wrapper flex-space-between">
+   <div class="auth-form-wrapper">
+      <h1>Login</h1>
+      <h4>Some subtitle goes here</h4>
+      <form [formGroup]="loginForm" (ngSubmit)="submitLoginForm()">
+         <fieldset class="login-form">
+            <app-input inputType="text" placeholderName="YOUR EMAIL ADDRESS" marker="yes" type="required"
+               [formGroup]="loginForm" [formControlName]="'email'"></app-input>
+            <app-input inputType="password" placeholderName="ENTER YOUR PASSWORD" marker="yes" type="required"
+               [formGroup]="loginForm" [formControlName]="'password'"></app-input>
+         </fieldset>
+         <a routerLink="/forgot-password">forgot password</a><br>
+         <app-button btnClass="confirm" btnText="LOG IN" btnType="submit" type="submit"></app-button>
+      </form>
+   </div>
+   <div class="banner">
+      <app-button routerLink="/create-account" btnClass="banner-button" btnText="CREATE ACCOUNT"></app-button>
+      <img class="background" src="../../../assets/images/banner.jpg" alt="banner">
+      <img class="logo" src="../../../assets/icons/logo-white.svg" alt="logo">
+   </div>
+</section>
+<progress-spinner *ngIf="spinner"></progress-spinner>

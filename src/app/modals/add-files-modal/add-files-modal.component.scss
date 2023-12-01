@@ -1,0 +1,64 @@
+@import '../../../styles/classes.scss';
+
+.add-files-modal .form-core label {
+    float: left;
+    display: flex;
+    align-items: center;
+    height: 54px;
+    border-radius: 8px;
+    background-color: var(--green);
+    color: var(--white);
+    padding: 0 10px;
+    padding: 0 clamp(10px, 1.5vmax, 34px);
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: capitalize;
+    cursor: pointer;
+}
+
+.add-files-modal .form-core input {
+    display: none;
+}
+
+main > fieldset {
+    width: 100%;
+    margin-top: 2vh;
+}
+
+table, table tr {
+    width: 100%;
+}
+
+tr {
+    width: 100%;
+}
+
+th,
+td {
+    border-bottom: 2px solid var(--light-grey);
+    text-align: left;
+}
+
+th {
+    color: rgba(0, 0, 0, .54);
+    padding: 10px 0;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 3px;
+}
+
+td {
+    padding: 8px 0;
+    font-weight: 600;
+
+    span {
+        @extend .cent-fl;
+        width: 36px;
+        height: 36px;
+        border-radius: 8px;
+        color: var(--white);
+        font-size: 14px;
+        font-weight: 600;
+    }
+}

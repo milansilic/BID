@@ -1,0 +1,26 @@
+<form class="add-files-modal" [formGroup]="fileForm" (ngSubmit)="submitCompanyInfo()">
+    <header class="flex-space-between">
+        <h4>Add Files</h4>
+        <img class="pointer" (click)="closeModal(false)" src="../../../assets/icons/x.svg" alt="close modal">
+    </header>
+    <div class="form-core flex-space-between">
+        <app-input placeholderName="Document name" marker="yes" type="required" [formGroup]="fileForm"
+            formControlName="fileName">
+        </app-input>
+        <ng-container *ngIf="!selectedFile.id">
+            <div><label for="fload2">upload/browse</label></div>
+            <input type="file" (change)="uploadProfilePhoto($event)" id="fload2" name="fload2">
+
+            <div *ngIf="showFileAddedMsg">
+                File added successfully
+            </div>
+        </ng-container>
+
+
+        <footer>
+            <app-button btnClass="confirm" btnText="save&close" type="submit">
+            </app-button>
+            <app-button btnClass="cancel" btnText="cancel" type="submit" (click)="closeModal(false)"></app-button>
+        </footer>
+    </div>
+</form>

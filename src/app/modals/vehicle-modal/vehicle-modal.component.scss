@@ -1,0 +1,75 @@
+@import '../../../styles/classes.scss';
+
+.card-container > fieldset {
+  margin: 0 auto 1vh;
+
+  &>* {
+    display: block;
+    width: 47.5%;
+  }
+
+  h4, button {
+    text-transform: capitalize;
+  }
+
+  hgroup, button {
+    margin-bottom: 1.5vh;
+  }
+
+  h5 {
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    text-transform: capitalize;
+  }
+
+  h6 {
+    color: var(--dark-grey);
+    padding: 0;
+    margin-top: 0.3vh;
+    font-size: 10px;
+    font-size: clamp(10px, 1.2vw, 12px);
+    font-weight: 400;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+  }
+
+  &>button {
+    display: inline-block;
+    width: auto;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: -0.05em;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  app-button {
+    width: auto;
+  }
+}
+
+.delete-modal {
+  header {
+    padding: 26px 36px 22px;
+  }
+
+  ul,
+  form {
+    padding: 2.2vh 3vw;
+  }
+
+  form {
+    padding-bottom: 0;
+
+    display: flex;
+    flex-flow: column;
+  }
+
+  h6 {
+    margin-bottom: 12px;
+  }
+
+  footer {
+    padding: 24px 2vw;
+  }
+}

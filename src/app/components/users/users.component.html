@@ -1,0 +1,62 @@
+<!-- <app-my-dashboard></app-my-dashboard> -->
+
+<section class="material-grid shadow">
+   <header class="flex-space-between">
+      <h4>users</h4>
+      <mat-form-field>
+         <mat-label>Filter</mat-label>
+         <input matInput (keyup)="applyFilter($event)" placeholder="" #input>
+      </mat-form-field>
+      <button type="button" (click)="openAddModal()">add new user <span>+</span></button>
+   </header>
+   <div class="mat-elevation-z8">
+      <table mat-table matSort class="mat-elevation-z8" [dataSource]="dataSource">
+         <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by name">
+               Name
+            </th>
+            <td mat-cell *matCellDef="let users"> {{users.name}} </td>
+         </ng-container>
+         <ng-container matColumnDef="role">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by number">
+               Job title
+            </th>
+            <td class="job" mat-cell *matCellDef="let users"> {{users.role}} </td>
+         </ng-container>
+         <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef> Actions </th>
+            <td mat-cell *matCellDef="let element" class="icon">
+               <button (click)="openEditModal(element)"></button>
+               <button (click)="openDeleteModal(element)"></button>
+            </td>
+         </ng-container>
+         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+         <tr mat-row *matRowDef="let row; columns: displayedColumns;" [class.active]="clickedRow === row"
+            (click)="getRecord(row)">
+         </tr>
+      </table>
+      <mat-paginator #paginator [pageSizeOptions]="[5, 15, 20]" showFirstLastButtons>
+      </mat-paginator>
+   </div>
+</section>
+
+<!-- ADD / EDIT -->
+<user-modal *ngIf="openUsersModal" [userId]="selectedUser.id" (closeModalEvnt)="closeModal($event)"></user-modal>
+
+<!-- DELETE -->
+<div class="delete-modal shadow" *ngIf="showDeleteModal">
+   <header>
+      <h4>delete user</h4>
+   </header>
+   <p>Are you sure you want to delete user?
+      <!-- here the name of clicked profile should be added -->
+   </p>
+   <footer>
+      <app-button btnClass="confirm" btnText="yes" (click)="deleteUser()"></app-button>
+      <app-button btnClass="cancel" btnText="no" (click)="closeModals()"></app-button>
+   </footer>
+</div>
+
+<mask *ngIf="openUsersModal || showDeleteModal"></mask>
+
+<progress-spinner *ngIf="spinner"></progress-spinner>

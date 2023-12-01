@@ -1,0 +1,21 @@
+<div [formGroup]="formGroup">
+
+   <mat-form-field class="app-input">
+      <input matInput type="{{inputType}}" [readonly]="disabled" placeholder="{{placeholderName}}"
+         [formControlName]="formControlName" [errorStateMatcher]="matcher">
+
+      <mat-error
+         *ngIf="inputType ==='email' && emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+         Please enter a valid email address
+      </mat-error>
+
+      <mat-error *ngIf="emailFormControl.hasError('required') && inputType ==='email'">
+         Email is <strong>required</strong>
+      </mat-error>
+
+      <mat-error *ngIf="emailFormControl.hasError('required') && inputType !=='email' && marker==='yes'">
+         {{ placeholderName }} is <strong>required</strong>
+      </mat-error>
+
+   </mat-form-field>
+</div>

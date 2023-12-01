@@ -1,0 +1,8 @@
+<section class="wrapper">
+    <app-menu (menuOpenOutput)="isMenuOpen($event)"></app-menu>
+    <app-profile></app-profile>
+    <figure>
+        <img [class.slide]="menuIsOpen" class="logo-small" src="../../../../assets/icons/logo-small.svg" alt="logo">
+    </figure>
+    <router-outlet></router-outlet>
+</section>

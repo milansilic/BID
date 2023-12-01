@@ -1,0 +1,150 @@
+<form class="user-modal" id="usersForm" *ngIf="showForm" #usersForm="ngForm" [formGroup]="createUserForm"
+   (ngSubmit)="submitUserInfo()">
+   <header class="flex-space-between">
+      <h4>{{!user.id ? 'Add New' : 'Edit'}} User</h4>
+      <img class="pointer" (click)="closeModal()" src="../../../assets/icons/x.svg" alt="close modal">
+   </header>
+   <ul class="flex-space-between">
+      <li [class.active]="activeTab === tabsRef.card1" (click)="changeCard(tabsRef.card1)">Basic info</li>
+      <li [class.active]="activeTab === tabsRef.card2" (click)="changeCard(tabsRef.card2)">Work info</li>
+      <li [class.active]="activeTab === tabsRef.card3" (click)="changeCard(tabsRef.card3)">Addditional info</li>
+      <li [class.active]="activeTab === tabsRef.idCard" (click)="changeCard(tabsRef.idCard)">id card</li>
+      <li [class.active]="activeTab === tabsRef.passports" (click)="changeCard(tabsRef.passports)">passports</li>
+      <li [class.active]="activeTab === tabsRef.drivingLicence" (click)="changeCard(tabsRef.drivingLicence)">driving
+         licence</li>
+   </ul>
+   <div class="form-core">
+      <div class="card-container flex-space-between" *ngIf="activeTab === tabsRef.card1">
+         <app-input inputType="text" placeholderName="user name" marker="yes" type="required"
+            [formGroup]="createUserForm" [formControlName]="'userName'"></app-input>
+         <app-datepicker labelText="dob" type="required" marker="yes" [formGroup]="createUserForm"
+            [formControlName]="'dateOfBirth'"></app-datepicker>
+         <app-input inputType="password" placeholderName="password" marker="yes" type="required"
+            [formGroup]="createUserForm" [formControlName]="'password'"></app-input>
+         <app-select placeholderName="role" marker="yes" type="required" [formGroup]="createUserForm"
+            [formControlName]="'role'" [dropdownValues]="roles" (selectionChanged)="roleChanged($event)"></app-select>
+         <app-input inputType="text" placeholderName="first name" marker="yes" type="required"
+            [formGroup]="createUserForm" [formControlName]="'firstName'"></app-input>
+         <app-input inputType="tel" placeholderName="contact" marker="yes" type="required" [formGroup]="createUserForm"
+            [formControlName]="'cellNumber'"></app-input>
+         <app-input inputType="text" placeholderName="last name" marker="yes" type="required"
+            [formGroup]="createUserForm" [formControlName]="'lastName'"></app-input>
+         <app-input inputType="email" placeholderName="email address" marker="yes" type="required"
+            [formGroup]="createUserForm" [formControlName]="'email'"></app-input>
+         <app-input inputType="text" placeholderName="parent name" marker="yes" type="required"
+            [formGroup]="createUserForm" [formControlName]="'parentName'"></app-input>
+         <app-input inputType="text" placeholderName="bank account" marker="yes" type="required"
+            [formGroup]="createUserForm" [formControlName]="'bankAccount'"></app-input>
+      </div>
+      <div class="card-container flex-space-between" *ngIf="activeTab === tabsRef.card2">
+         <app-datepicker labelText="working start date" type="required" marker="yes" [formGroup]="createUserForm"
+            [formControlName]="'workingStartDate'"></app-datepicker>
+         <app-datepicker labelText="contract expire date" type="required" marker="yes" [formGroup]="createUserForm"
+            [formControlName]="'contractExpiryDate'"></app-datepicker>
+         <h6>health insurance</h6>
+         <div></div>
+         <app-input inputType="string" placeholderName="number" marker="yes" type="required"
+            [formGroup]="createUserForm" [formControlName]="'healthInsuranceNumber'">
+         </app-input>
+         <app-datepicker labelText="valid until" type="required" marker="yes" [formGroup]="createUserForm"
+            [formControlName]="'healthInsuranceExpiryDate'"></app-datepicker>
+         <app-textarea inputType="text" placeholderName="description" type="required" [formGroup]="createUserForm"
+            name="healthInsuranceDescription" [formControlName]="'healthInsuranceDescription'"></app-textarea>
+      </div>
+      <div class="card-container flex-space-between" *ngIf="activeTab === tabsRef.card3">
+         <app-input inputType="text" placeholderName="umcn" marker="yes" type="required" [formGroup]="createUserForm"
+            [formControlName]="'identificationNumber'"></app-input>
+         <app-input inputType="text" placeholderName="place of birth" marker="yes" type="required"
+            [formGroup]="createUserForm" [formControlName]="'placeOfBirth'"></app-input>
+         <app-input inputType="text" placeholderName="municipality of birth" marker="yes" type="required"
+            [formGroup]="createUserForm" [formControlName]="'municipalityOfBirth'"></app-input>
+         <app-input inputType="text" placeholderName="current address" marker="yes" type="required"
+            [formGroup]="createUserForm" [formControlName]="'address'"></app-input>
+         <app-input inputType="text" placeholderName="current city" marker="yes" type="required"
+            [formGroup]="createUserForm" [formControlName]="'city'"></app-input>
+         <app-input inputType="text" placeholderName="current country" marker="yes" type="required"
+            [formGroup]="createUserForm" [formControlName]="'country'"></app-input>
+      </div>
+      <div class="card-container flex-space-between" *ngIf="activeTab === tabsRef.idCard">
+         <app-input inputType="text" placeholderName="number" marker="yes" type="required" [formGroup]="createUserForm"
+            [formControlName]="'idCardNumber'"></app-input>
+         <app-datepicker labelText="valid until" type="required" marker="yes" [formGroup]="createUserForm"
+            [formControlName]="'idCardExpiryDate'"></app-datepicker>
+      </div>
+      <div class="card-container flex-space-between" *ngIf="activeTab === tabsRef.passports">
+         <app-input inputType="text" placeholderName="issued by the state" marker="yes" type="required"
+            [formGroup]="createUserForm" [formControlName]="'passportState'"></app-input>
+         <app-input inputType="text" placeholderName="number" marker="yes" type="required" [formGroup]="createUserForm"
+            [formControlName]="'passportNumber'"></app-input>
+         <app-datepicker labelText="issued date" type="required" marker="yes" [formGroup]="createUserForm"
+            [formGroup]="createUserForm" [formControlName]="'passportIssuedDate'"></app-datepicker>
+         <app-input inputType="text" placeholderName="issued place" marker="yes" type="required"
+            [formGroup]="createUserForm" [formControlName]="'passportCity'"></app-input>
+         <app-datepicker labelText="passport valid until" type="required" marker="yes" [formGroup]="createUserForm"
+            [formGroup]="createUserForm" [formControlName]="'passportExpiryDate'">
+         </app-datepicker>
+      </div>
+      <div class="card-container flex-space-between" *ngIf="activeTab === tabsRef.drivingLicence">
+         <app-input inputType="text" placeholderName="number" marker="yes" type="required" [formGroup]="createUserForm"
+            [formControlName]="'driverLicenseNumber'">
+         </app-input>
+         <app-datepicker class="input-large" labelText="issued date" type="required" marker="yes"
+            [formGroup]="createUserForm" [formControlName]="'driverLicenseIssuedDate'"></app-datepicker>
+         <app-datepicker class="input-large" labelText="expiry date" type="required" marker="yes"
+            [formGroup]="createUserForm" [formControlName]="'driverLicenseExpiryDate'"></app-datepicker>
+         <span></span>
+         <form class="add-category flex-space-between" [formGroup]="driverCategoryForm"
+            (ngSubmit)="submitDriverCategoryForm()">
+            <app-select class="input-medium" placeholderName="category" marker="yes" type="required"
+               [dropdownValues]="categories" [formGroup]="driverCategoryForm"
+               [formControlName]="'driverLicenseCategory'"></app-select>
+            <app-datepicker class="input-large" labelText="date of application" type="required" marker="yes"
+               [formGroup]="createUserForm" [formGroup]="driverCategoryForm"
+               [formControlName]="'driverLicenseIssuedDate'"></app-datepicker>
+            <app-datepicker class="input-large" labelText="valid until" type="required" marker="yes"
+               [formGroup]="createUserForm" [formGroup]="driverCategoryForm"
+               [formControlName]="'driverLicenseExpiryDate'"></app-datepicker>
+            <button type="submit" class="add-btn" for="fload">add new Category<span>+</span></button>
+         </form>
+         <fieldset>
+            <table #table mat-table matSort class="modal-table mat-elevation-z8" [dataSource]="driverDataSource">
+               <ng-container matColumnDef="category">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Category</th>
+                  <td mat-cell *matCellDef="let driverLicenceCategories">
+                     {{driverLicenceCategories.categoryLabel}}
+                  </td>
+               </ng-container>
+               <ng-container matColumnDef="dateOfApplication">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Date of application</th>
+                  <td mat-cell *matCellDef="let driverLicenceCategories">
+                     {{driverLicenceCategories.issueDate | date: 'dd-MM-YYYY'}}
+                  </td>
+               </ng-container>
+               <ng-container matColumnDef="validUntil">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Valid Until</th>
+                  <td mat-cell *matCellDef="let driverLicenceCategories">
+                     {{driverLicenceCategories.expiryDate | date: 'dd-MM-YYYY'}}
+                  </td>
+               </ng-container>
+               <ng-container matColumnDef="actions">
+                  <th mat-header-cell *matHeaderCellDef> Actions </th>
+                  <td mat-cell *matCellDef="let element; let i = index" class="icon">
+                     <button (click)="deleteLicenceCategory(i)"></button>
+                  </td>
+               </ng-container>
+               <tr mat-header-row *matHeaderRowDef="driverCategoryColumns"></tr>
+               <tr mat-row *matRowDef="let row; columns: driverCategoryColumns;"></tr>
+            </table>
+         </fieldset>
+      </div>
+   </div>
+   <footer>
+      <!-- <app-button *ngIf="activeTab !== tabsRef.passports" btnClass="populate-button" btnText="populate from id"
+         type="submit">
+      </app-button> -->
+      <app-button btnClass="confirm" btnText="save&close" btnType="submit" type="submit"></app-button>
+      <app-button *ngIf="activeTab !== tabsRef.drivingLicence" btnClass="next" btnText="next" btnType="button"
+         (click)="nextClicked()"></app-button>
+      <app-button btnClass="cancel" btnText="cancel" btnType="button" (click)="closeModal()"></app-button>
+   </footer>
+</form>
